@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+build/
+
+.env.local
+.env*.local
+
+# Per-machine tool permissions; launch.json is shared and stays tracked.
+.claude/settings.local.json
+
+*.tsbuildinfo
+next-env.d.ts
+
+.DS_Store
+Thumbs.db
+.vercel

@@ -1,0 +1,125 @@
+{
+  "founder-with-guests": {
+    "faceVisibility": "none",
+    "published": true,
+    "width": 1280,
+    "height": 960,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoQAAwAA4BaJZACdAEWLCXVTnBBAAD6nS+VMJY/nVHnq0/rkq4ZSocofmb4LSuJ4NIx5dQxz1bJhksD+sdr6QqumkuCmVQ7hYCqHpZWgxSTft+ZpvvAAA=="
+  },
+  "independence-day-chief-guest": {
+    "faceVisibility": "none",
+    "published": true,
+    "width": 960,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZQC7AywBrrPL6k3gxmM4j8AA/uPrzIZ1VX7cQPdLULBpbhFXv7zYlE6uKl8dYamXKkdp3VfzBp8M59R5k9Mdq9Lra/2Jx4AQCWlTJGFTI3jD1SkUePUsJ0Mk3PI8U4AAAA=="
+  },
+  "school-bus-morning": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 1408,
+    "height": 1056,
+    "blurDataURL": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQAgCdASoQAAwAA4BaJbACdAYvNy91Po/33xAA4Z1KZ86YoOx757Im/Ve9uyrxvv0ak0EqQiYH6Q61zqnVy/dVIgX9qiNLvs0nVvxzXRkJLMDNhQYNAr1y10PjH/9CzVYp2tbJBy8uHr8wsEICsPl++HxgAA=="
+  },
+  "lunch-queue": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 1408,
+    "height": 1056,
+    "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAwAA4BaJQBdj+ADM4u14Uw7T4AA/vQEyVgWnxi56Uh4DckZbhiGJcuG3QtBi7B1EEOnwvH3Klz+08uQf7iG8EfvuH7al4TjZ0i9U/tysYultcnMqQkm4CTJGgAA"
+  },
+  "play-area": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 720,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAACwBACdASoQABwAPu1iqU2ppaOiMAgBMB2JbACdBagBtyHwugyezFoZBXETYttAAPyL12fzFazZ+TsdP/ESxbz8p9P9AtrAUMbLeLr8kBcRAcjkU7vOAfGnD9IWxT80ml/26uG8mCwJbVmmC9oHA7Sjl9jduBDmWXWrPuLMfWYL1oOyO+TujpcGzpSFNK5v7JkU5/8kULieteT9xrR0k6dw25XGTdjmVngyPPtdYXVKdWItiuLqI0sMB5OPqHe8Gdjng4QMgtDbQAAA"
+  },
+  "medical-camp": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 1280,
+    "height": 960,
+    "blurDataURL": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAACQAgCdASoQAAwAA4BaJaACdAYvrwnz7EZH/beKAAD9U/bQw1VG9SVHNmIWlhP8iLKHxD77hLaDm3ZN1wH/Gav0VWauRqoQn8wfpJVqRwmJoa8uV7uuvWnm5ezvU1DWfagjGKmDgV6F5tlu5AA="
+  },
+  "football-training": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 1600,
+    "height": 900,
+    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAkAA4BaJQBOgCG0kEFBAAD+mrGljOX9/eB5gk/5PD+HTdj8ERtBAtABA8MZaVg5AcWXNnXJoAAA"
+  },
+  "football-team": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 1600,
+    "height": 900,
+    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAQCdASoQAAkAA4BaJZgCdABfx+AA/uTWtTUd07NJmbW2Gm2brVK0MO/8gB90dTxn0683AnwDcr13N5gAAA=="
+  },
+  "celebration-performance": {
+    "faceVisibility": "incidental",
+    "published": true,
+    "width": 1408,
+    "height": 1056,
+    "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAQCdASoQAAwAA4BaJaACdAECqtKvXYwA/rgwu5sMZNrpkiXvpmLylI4fUX+J6U55FXl518GV7dpubb3683Pk9b2GNFTly5if1nObau8R7JqQck/sE3WP9lBBRzlrEsWDYAAA"
+  },
+  "independence-day-group": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "independence-day-students": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "lunch-together": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "lunch-younger-children": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "school-bus-lineup": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "school-bus-boarding": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "school-bus-inside": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-1": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-2": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-3": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-4": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-5": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-6": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-7": {
+    "faceVisibility": "prominent",
+    "published": false
+  },
+  "village-stationery-8": {
+    "faceVisibility": "prominent",
+    "published": false
+  }
+}

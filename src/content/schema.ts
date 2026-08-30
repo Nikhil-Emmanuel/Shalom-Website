@@ -1,0 +1,132 @@
+import { z } from "zod";
+
+/**
+ * Every piece of content on this site is validated against these schemas at
+ * import time. When a CMS replaces the local files (phase 2), it must satisfy
+ * exactly these shapes — so the swap cannot silently break a page.
+ */
+
+/**
+ * How identifiable are the children in a photograph?
+ *
+ *  none        no children, or none whose face is visible (adults only)
+ *  incidental  children present, but nobody is an identifiable subject —
+ *              wide shots, backs turned, profiles, distant figures
+ *  prominent   at least one child's face is clearly identifiable
+ *
+ * See lib/privacy.ts for how this is enforced.
+ */
+export const faceVisibilitySchema = z.enum(["none", "incidental", "prominent"]);
+export type FaceVisibility = z.infer<typeof faceVisibilitySchema>;
+
+export const photoCategorySchema = z.enum([
+  "daily-life",
+  "education",
+  "nutrition",
+  "health",
+  "sport",
+  "celebration",
+  "outreach",
+  "people",
+]);
+export type PhotoCategory = z.infer<typeof photoCategorySchema>;
+
+export const photoSchema = z.object({
+  slug: z.string(),
+  src: z.string(),
+  caption: z.string(),
+  /** Written for screen readers: describes the scene, never names a child. */
+  alt: z.string(),
+  category: photoCategorySchema,
+  faceVisibility: faceVisibilitySchema,
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+  blurDataURL: z.string(),
+});
+export type Photo = z.infer<typeof photoSchema>;
+
+export const siteSchema = z.object({
+  name: z.string(),
+  shortName: z.string(),
+  tagline: z.string(),
+  description: z.string(),
+  url: z.string().url(),
+  founded: z.number().int(),
+  registration: z.object({
+    number: z.string(),
+    date: z.string(),
+    taxExemption: z.string().nullable(),
+  }),
+  /** FCRA — when false, the site must not solicit donations from abroad. */
+  acceptsForeignDonations: z.boolean(),
+  address: z.object({
+    lines: z.array(z.string()),
+    locality: z.string(),
+    region: z.string(),
+    postalCode: z.string().nullable(),
+    country: z.string(),
+    mapsUrl: z.string().url().nullable(),
+  }),
+  contact: z.object({
+    emails: z.array(z.string().email()).min(1),
+    /** null until the home supplies a number — the UI hides the field. */
+    phone: z.string().nullable(),
+    whatsapp: z.string().nullable(),
+  }),
+  social: z.object({
+    instagram: z.string().url().nullable(),
+    facebook: z.string().nullable(),
+  }),
+  visiting: z.object({
+    note: z.string(),
+    slots: z.array(z.string()),
+  }),
+});
+export type Site = z.infer<typeof siteSchema>;
+
+export const statSchema = z.object({
+  value: z.number(),
+  /** Rendered after the counted value, e.g. "+" or "" */
+  suffix: z.string().default(""),
+  label: z.string(),
+  detail: z.string(),
+});
+export type Stat = z.infer<typeof statSchema>;
+
+export const programSchema = z.object({
+  slug: z.string(),
+  title: z.string(),
+  summary: z.string(),
+  body: z.string(),
+  icon: z.string(),
+  photo: z.string().nullable(),
+});
+export type Program = z.infer<typeof programSchema>;
+
+/** One scene in the pinned horizontal "A Day at Shalom" journey. */
+export const journeyStopSchema = z.object({
+  id: z.string(),
+  time: z.string(),
+  title: z.string(),
+  body: z.string(),
+  photo: z.string(),
+});
+export type JourneyStop = z.infer<typeof journeyStopSchema>;
+
+export const involvementSchema = z.object({
+  slug: z.string(),
+  title: z.string(),
+  summary: z.string(),
+  points: z.array(z.string()),
+  icon: z.string(),
+  /** Pre-selects the intent on the enquiry form. */
+  intent: z.string(),
+});
+export type Involvement = z.infer<typeof involvementSchema>;
+
+export const timelineEntrySchema = z.object({
+  year: z.string(),
+  title: z.string(),
+  body: z.string(),
+});
+export type TimelineEntry = z.infer<typeof timelineEntrySchema>;

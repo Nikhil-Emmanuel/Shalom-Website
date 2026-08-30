@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/*
+ * Shalom Children's Home — design tokens
+ * Direction: warm editorial canvas. Structure adapted from the `claude` reference
+ * system (awesome-design-md); hues re-derived from the home's own photographs —
+ * terracotta from the celebration carpet, marigold from the Independence Day
+ * decorations, green from the football pitch.
+ *
+ * Contrast (WCAG 2.1, computed not eyeballed):
+ *   ink     on canvas  16.6:1   body   on canvas  9.8:1
+ *   muted   on canvas   5.1:1   primary on canvas 4.8:1
+ *   white   on primary  5.1:1   white  on green   6.0:1
+ * `accent` (marigold) is decorative only — never used for text.
+ */
+
+@theme {
+  /* ---- Colour ---- */
+  --color-canvas: #faf8f3;
+  --color-surface-soft: #f4efe5;
+  --color-surface-card: #efe8da;
+  --color-surface-deep: #1f1c17;
+  --color-surface-deep-soft: #2a2620;
+
+  --color-ink: #1a1815;
+  --color-body: #3d3a34;
+  --color-muted: #6e6961;
+  --color-hairline: #e4dccd;
+
+  --color-primary: #b0522f;
+  --color-primary-hover: #91411f;
+  --color-primary-soft: #c2603c;
+  --color-on-primary: #ffffff;
+
+  --color-accent: #e0913a;
+  --color-green: #2f6f52;
+  --color-destructive: #b3261e;
+  --color-on-dark: #f4efe5;
+  --color-on-dark-muted: #a49c8e;
+
+  /* ---- Type ---- */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid scale — clamp so 375px never overflows and 1440px never looks timid */
+  --text-display-xl: clamp(2.5rem, 1.5rem + 4vw, 4rem);
+  --text-display-lg: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+  --text-display-md: clamp(1.75rem, 1.3rem + 1.9vw, 2.75rem);
+  --text-display-sm: clamp(1.375rem, 1.15rem + 0.95vw, 1.875rem);
+
+  /* ---- Spacing rhythm ---- */
+  --spacing-section: 6rem;
+  --spacing-section-lg: 8.5rem;
+
+  /* ---- Radii ---- */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+
+  /* ---- Elevation: warm-tinted, never neutral grey ---- */
+  --shadow-soft: 0 1px 2px rgb(61 58 52 / 0.04), 0 4px 16px rgb(61 58 52 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(61 58 52 / 0.05), 0 12px 32px rgb(61 58 52 / 0.1);
+
+  /* ---- Motion ---- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Keep focus visible — never remove it. Offset so it clears image edges. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+  }
+}
+
+@layer utilities {
+  /* Lenis attaches these; declared here so scroll behaviour is predictable. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Accessibility: honour the OS-level motion preference globally. Individual GSAP
+ * timelines also check this via lib/motion.ts, but this is the backstop that
+ * catches CSS transitions and any effect added later.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
