@@ -109,7 +109,14 @@ export function Footer() {
             <span aria-hidden>·</span>
             <span>
               Developed and powered by{" "}
-              <span className="font-medium text-body">{builtBy.name}</span>{" "}
+              <a
+                href="https://www.nevark.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-body hover:underline"
+              >
+                {builtBy.name}
+              </a>{" "}
               <span className="whitespace-nowrap">(LLPIN {builtBy.llpin})</span>
             </span>
           </p>
