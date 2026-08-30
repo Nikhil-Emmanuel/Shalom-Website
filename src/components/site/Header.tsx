@@ -7,6 +7,7 @@ import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { MuralPattern } from "@/components/site/MuralPattern";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -37,8 +38,16 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline/70 bg-canvas/85 backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-hairline/60 bg-canvas/70 backdrop-blur-xl">
+      {/* Mural texture, behind the nav and clipped to the bar */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 overflow-hidden text-ink/[0.04]"
+      >
+        <MuralPattern className="size-full" />
+      </div>
+
+      <Container className="relative flex h-16 items-center justify-between gap-4">
         <Link
           href="/"
           className="font-display text-base leading-none font-semibold tracking-[-0.01em] text-ink sm:text-lg"
@@ -90,7 +99,7 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Main"
-          className="border-t border-hairline bg-canvas md:hidden"
+          className="relative border-t border-hairline bg-canvas md:hidden"
         >
           <Container className="flex flex-col py-3">
             {links.map((link) => (

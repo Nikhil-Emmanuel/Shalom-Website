@@ -1,9 +1,7 @@
 "use client";
 
 import { useRef, type ElementType, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useIsomorphicLayoutEffect, motionLevel, whenVisible } from "@/lib/motion";
+import { useIsomorphicLayoutEffect } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
@@ -18,8 +16,18 @@ type RevealProps = {
 };
 
 /**
- * Scroll-triggered entrance. The element starts hidden via GSAP (not CSS) so
- * that when motion is reduced — or JS fails — the content is simply visible.
+ * Scroll-triggered entrance, built on IntersectionObserver and CSS transitions
+ * rather than GSAP ScrollTrigger.
+ *
+ * This used to use ScrollTrigger and could strand content at opacity 0 forever:
+ * trigger positions are measured at creation, and if they were computed against
+ * a shorter pre-image document and never refreshed, a `once` trigger simply
+ * never fired. Cards flashed in and vanished. IntersectionObserver reports the
+ * element's initial state as soon as it is observed, so there is no equivalent
+ * failure — and it needs no ticker, so it is unaffected by rAF throttling.
+ *
+ * Content is visible in the markup. The hiding class is only ever applied by
+ * this effect, so no-JS, a crawler, or a hidden tab all see the finished state.
  */
 export function Reveal({
   children,
@@ -35,30 +43,48 @@ export function Reveal({
     const el = ref.current;
     if (!el) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-    const reduced = motionLevel() === "reduced";
-    let ctx: gsap.Context | undefined;
+    // Hidden tab: leave the content alone. Nothing is scheduled to reveal it.
+    if (document.hidden) return;
 
-    const cancel = whenVisible(() => {
-      ctx = gsap.context(() => {
-        const targets = stagger ? Array.from(el.children) : el;
+    const targets = (
+      stagger ? Array.from(el.children) : [el]
+    ) as HTMLElement[];
 
-        gsap.from(targets, {
-          opacity: 0,
-          // Fade only when movement is unwelcome; never travel the screen.
-          y: reduced ? 0 : y,
-          duration: reduced ? 0.5 : 0.7,
-          delay,
-          ease: "power3.out",
-          stagger: stagger ? 0.08 : 0,
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
-        });
-      }, el);
+    // Applied in a layout effect, so it lands before paint — no flash of the
+    // final state followed by it disappearing.
+    targets.forEach((target, index) => {
+      target.dataset.reveal = "";
+      target.style.setProperty(
+        "--reveal-delay",
+        `${delay + (stagger ? index * 0.08 : 0)}s`,
+      );
+      target.style.setProperty("--reveal-y", `${y}px`);
     });
 
+    const show = () => targets.forEach((t) => (t.dataset.revealIn = ""));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        show();
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    observer.observe(el);
+
+    // Belt and braces: whatever happens, this content becomes visible.
+    const failsafe = window.setTimeout(show, 3000);
+
     return () => {
-      cancel();
-      ctx?.revert();
+      window.clearTimeout(failsafe);
+      observer.disconnect();
+      targets.forEach((target) => {
+        delete target.dataset.reveal;
+        delete target.dataset.revealIn;
+        target.style.removeProperty("--reveal-delay");
+        target.style.removeProperty("--reveal-y");
+      });
     };
   }, [delay, stagger, y]);
 

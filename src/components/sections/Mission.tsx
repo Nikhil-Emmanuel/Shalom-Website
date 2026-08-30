@@ -28,7 +28,9 @@ export function Mission() {
       ctx = gsap.context(() => {
         gsap.fromTo(
           "[data-word]",
-          { opacity: 0.18 },
+          // Floor kept legible: if the scrub never updates, this text must
+          // still be readable rather than a ghost.
+          { opacity: 0.35 },
           {
             opacity: 1,
             ease: "none",

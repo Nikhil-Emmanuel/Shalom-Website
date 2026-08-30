@@ -8,6 +8,7 @@ import { hero } from "@/content/home";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { SafeImage } from "@/components/media/SafeImage";
+import { HeroMotif } from "@/components/sections/HeroMotif";
 import { Icon } from "@/components/ui/Icon";
 import { useIsomorphicLayoutEffect, motionLevel, whenVisible } from "@/lib/motion";
 
@@ -28,9 +29,19 @@ export function Hero({ photos }: { photos: Photo[] }) {
     const reduced = motionLevel() === "reduced";
     let ctx: gsap.Context | undefined;
 
+    let failsafe = 0;
+
     const cancel = whenVisible(() => {
       ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      // The hero is the highest-stakes element on the site and this timeline
+      // starts it at opacity 0. If it is ever interrupted — the tab is hidden
+      // mid-flight, the ticker stalls — the whole hero would be left blank.
+      // Jump to the end state if it has not finished in a generous window.
+      failsafe = window.setTimeout(() => {
+        if (tl.progress() < 1) tl.progress(1);
+      }, 4000);
 
       if (reduced) {
         // Same choreography and rhythm, expressed purely in opacity.
@@ -79,6 +90,7 @@ export function Hero({ photos }: { photos: Photo[] }) {
 
     return () => {
       cancel();
+      window.clearTimeout(failsafe);
       ctx?.revert();
     };
   }, []);
@@ -90,6 +102,8 @@ export function Hero({ photos }: { photos: Photo[] }) {
         aria-hidden
         className="pointer-events-none absolute -top-40 -left-40 size-[36rem] rounded-full bg-accent/10 blur-3xl"
       />
+
+      <HeroMotif />
 
       <Container className="relative grid items-center gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
         <div>

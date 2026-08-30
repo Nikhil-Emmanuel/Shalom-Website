@@ -18,7 +18,19 @@ export function SmoothScroll() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    if (prefersReducedMotion()) return;
+    // Images and webfonts settle after hydration and change section heights.
+    // This MUST happen whatever the motion preference: ScrollTrigger positions
+    // computed against a shorter, pre-image document can leave a `once` trigger
+    // that never matches, stranding its target at opacity 0. Keeping it below
+    // the reduced-motion return did exactly that.
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh);
+
+    const detachRefresh = () => window.removeEventListener("load", refresh);
+
+    // Lenis is smooth scrolling — that part is genuinely motion, so it stays off.
+    if (prefersReducedMotion()) return detachRefresh;
 
     const lenis = new Lenis({
       duration: 1.1,
@@ -32,14 +44,8 @@ export function SmoothScroll() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    // Images and webfonts settle after hydration and change section heights;
-    // without a refresh, pin start/end points are computed against stale values.
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-    document.fonts?.ready.then(refresh);
-
     return () => {
-      window.removeEventListener("load", refresh);
+      detachRefresh();
       gsap.ticker.remove(raf);
       lenis.destroy();
     };
