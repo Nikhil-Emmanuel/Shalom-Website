@@ -122,17 +122,61 @@ const curated: Curated[] = [
     alt: "Children seated in the green and blue seats of a school bus with a staff member.",
     category: "education",
   },
-  ...Array.from({ length: 8 }, (_, i) => ({
-    slug: `village-stationery-${i + 1}`,
-    caption: "Handing out school supplies at a village tuition centre",
-    alt: "The founder passing notebooks and stationery to a young person outside a village building.",
-    category: "outreach" as const,
-  })),
+  // One distribution day at a village tuition centre, in sequence.
+  {
+    slug: "village-stationery-7",
+    caption: "Pencils and notebooks, handed over one by one",
+    alt: "The founder passing a set of pencils and notebooks to a student outside a village building.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-1",
+    caption: "A geometry set for the new school year",
+    alt: "A student receiving a geometry set and notebooks, with others waiting behind.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-2",
+    caption: "Waiting your turn at the village centre",
+    alt: "A boy accepting a bundle of stationery while villagers look on.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-4",
+    caption: "Notebooks enough for the whole term",
+    alt: "A student taking a stack of notebooks and a pen from the founder.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-3",
+    caption: "A hand on the head, and a bag of books",
+    alt: "The founder resting a hand on a child's head in blessing while handing over school books.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-5",
+    caption: "A blessing with the books",
+    alt: "The founder offering a blessing to a student who is receiving a set of school supplies.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-6",
+    caption: "Colour pens, and a crowd to match",
+    alt: "Children gathered closely around the founder as sets of colour pens are handed out.",
+    category: "outreach",
+  },
+  {
+    slug: "village-stationery-8",
+    caption: "The last of the supplies going out",
+    alt: "Children reaching for the remaining stationery sets at the end of a distribution.",
+    category: "outreach",
+  },
 ];
 
 type GeneratedEntry = {
   faceVisibility: string;
   published: boolean;
+  redacted: boolean;
   width?: number;
   height?: number;
   blurDataURL?: string;
@@ -154,7 +198,12 @@ function build(): Photo[] {
     photos.push(
       photoSchema.parse({
         ...entry,
+        // Say so, rather than describing faces a screen-reader user cannot see.
+        alt: meta.redacted
+          ? `${entry.alt} Faces are obscured to protect the children's privacy.`
+          : entry.alt,
         faceVisibility: faceVisibilitySchema.parse(meta.faceVisibility),
+        redacted: meta.redacted,
         src: `/media/${entry.slug}.jpg`,
         width: meta.width,
         height: meta.height,

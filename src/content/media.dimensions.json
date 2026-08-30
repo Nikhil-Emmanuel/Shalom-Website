@@ -2,6 +2,7 @@
   "founder-with-guests": {
     "faceVisibility": "none",
     "published": true,
+    "redacted": false,
     "width": 1280,
     "height": 960,
     "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoQAAwAA4BaJZACdAEWLCXVTnBBAAD6nS+VMJY/nVHnq0/rkq4ZSocofmb4LSuJ4NIx5dQxz1bJhksD+sdr6QqumkuCmVQ7hYCqHpZWgxSTft+ZpvvAAA=="
@@ -9,6 +10,7 @@
   "independence-day-chief-guest": {
     "faceVisibility": "none",
     "published": true,
+    "redacted": false,
     "width": 960,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZQC7AywBrrPL6k3gxmM4j8AA/uPrzIZ1VX7cQPdLULBpbhFXv7zYlE6uKl8dYamXKkdp3VfzBp8M59R5k9Mdq9Lra/2Jx4AQCWlTJGFTI3jD1SkUePUsJ0Mk3PI8U4AAAA=="
@@ -16,6 +18,7 @@
   "school-bus-morning": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 1408,
     "height": 1056,
     "blurDataURL": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQAgCdASoQAAwAA4BaJbACdAYvNy91Po/33xAA4Z1KZ86YoOx757Im/Ve9uyrxvv0ak0EqQiYH6Q61zqnVy/dVIgX9qiNLvs0nVvxzXRkJLMDNhQYNAr1y10PjH/9CzVYp2tbJBy8uHr8wsEICsPl++HxgAA=="
@@ -23,6 +26,7 @@
   "lunch-queue": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 1408,
     "height": 1056,
     "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAwAA4BaJQBdj+ADM4u14Uw7T4AA/vQEyVgWnxi56Uh4DckZbhiGJcuG3QtBi7B1EEOnwvH3Klz+08uQf7iG8EfvuH7al4TjZ0i9U/tysYultcnMqQkm4CTJGgAA"
@@ -30,6 +34,7 @@
   "play-area": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 720,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAACwBACdASoQABwAPu1iqU2ppaOiMAgBMB2JbACdBagBtyHwugyezFoZBXETYttAAPyL12fzFazZ+TsdP/ESxbz8p9P9AtrAUMbLeLr8kBcRAcjkU7vOAfGnD9IWxT80ml/26uG8mCwJbVmmC9oHA7Sjl9jduBDmWXWrPuLMfWYL1oOyO+TujpcGzpSFNK5v7JkU5/8kULieteT9xrR0k6dw25XGTdjmVngyPPtdYXVKdWItiuLqI0sMB5OPqHe8Gdjng4QMgtDbQAAA"
@@ -37,6 +42,7 @@
   "medical-camp": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 1280,
     "height": 960,
     "blurDataURL": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAACQAgCdASoQAAwAA4BaJaACdAYvrwnz7EZH/beKAAD9U/bQw1VG9SVHNmIWlhP8iLKHxD77hLaDm3ZN1wH/Gav0VWauRqoQn8wfpJVqRwmJoa8uV7uuvWnm5ezvU1DWfagjGKmDgV6F5tlu5AA="
@@ -44,6 +50,7 @@
   "football-training": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 1600,
     "height": 900,
     "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAkAA4BaJQBOgCG0kEFBAAD+mrGljOX9/eB5gk/5PD+HTdj8ERtBAtABA8MZaVg5AcWXNnXJoAAA"
@@ -51,6 +58,7 @@
   "football-team": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 1600,
     "height": 900,
     "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAQCdASoQAAkAA4BaJZgCdABfx+AA/uTWtTUd07NJmbW2Gm2brVK0MO/8gB90dTxn0683AnwDcr13N5gAAA=="
@@ -58,68 +66,120 @@
   "celebration-performance": {
     "faceVisibility": "incidental",
     "published": true,
+    "redacted": false,
     "width": 1408,
     "height": 1056,
     "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAQCdASoQAAwAA4BaJaACdAECqtKvXYwA/rgwu5sMZNrpkiXvpmLylI4fUX+J6U55FXl518GV7dpubb3683Pk9b2GNFTly5if1nObau8R7JqQck/sE3WP9lBBRzlrEsWDYAAA"
   },
   "independence-day-group": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": false,
+    "redacted": false
   },
   "independence-day-students": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": false,
+    "redacted": false
   },
   "lunch-together": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": false,
+    "redacted": false
   },
   "lunch-younger-children": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1408,
+    "height": 1056,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADQAQCdASoQAAwAA4BaJYwCdAC2aya74AD+8LHB/Zpresgug7f+y4YxbWn8KG1zYWiSWBvXw7FfzByshgp8QdOH3mU/Jq0D886q+9jH5BodX3VTe3FxHzFJBqIsGgAA"
   },
   "school-bus-lineup": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1280,
+    "height": 960,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACwAQCdASoQAAwAA4BaJZgC7AD0s53kAPve8fy5mTyBjeSP3AP7OmF8mbqd5kIHhgLxTKGZkSxBNtwQGAtLDZ6qdtWuFuQkkEHg0GGJh6oAAA=="
   },
   "school-bus-boarding": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1280,
+    "height": 960,
+    "blurDataURL": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAwAA4BaJYgC7AYtzbHqKa7lSAD5bw7kJL6lq6mXZpdo3Ach+eBjy1P8clBDAEBH1P6F2mXy93gkgFCFb2ZpE+bV+gdnKRGeEiVXEwec2QSj/0/uVqZvVc90uSwp2oAAAA=="
   },
   "school-bus-inside": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1280,
+    "height": 960,
+    "blurDataURL": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAQAgCdASoQAAwAA4BaJZgC7AD0pFfEyHsAAP7KL98bbyjpzhEIbIBvQ+nRKoe7SExWoA0HcM3s0j4b2lYzI5Un1zhNpb9RkUTAcGxss3B8HO2yM3K1Y0KZExV2HfMgUZzkiM1QnPAAAA=="
   },
   "village-stationery-1": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAQCdASoQAAwAA4BaJQBOgBMiKS1gAP5r24TlMNbYCUo2jCvwZ/Kh5J23i52sc3FxRvFOeWQdhZGEp8rUjPRG0G9NWNBHvD+3eCVdz6C+/qB7Wdr2wOZMEAA="
   },
   "village-stationery-2": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAQCdASoQAAwAA4BaJQBOgBTD4LfoAPz1dakop9x3wKztRPggEB05wZVZOJV+pum9jZ9BIdauAsH0ckLAG2Yit4MQV3Oxg5npDdJCTm+aWBLU1fr75NAA"
   },
   "village-stationery-3": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQAAwAA4BaJQBOkCYjMwbxHIZTAAD+m6SQSi1mNjtMfxxxElZpjnQ3OpKwuJj/j/T5lG++F9W2C/mHkh2d7kyS7s4GL5hnWMNf5lWHLJkakAFQbUTXjWCACBaS31DOgAA="
   },
   "village-stationery-4": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoQAAwAA4BaJYwCdADsYKPg/oAA/pwNbGfxAivekTG/PJBhYesgPaXc9j/qxwTmQ3SucdYpArcR/QkHV1LSP1Kmv9EQVjrDquUOO9J8cbLKaPkQT0KVUwAA"
   },
   "village-stationery-5": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQAgCdASoQAAwAA4BaJQBOgCMDVXQ09GpgAP7wnRmvNYzb+a43nkQaW6BEeX79fpI6njWl+mDvjfn675qLykcwd123lHXYnfhJ4vnTZFx58gGU249eTjY7tT6fQeYQ6M9x/gArAAA="
   },
   "village-stationery-6": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADQAQCdASoQAAwAA4BaJQBOgBFI5P/BqAD+4ntWLbktug6WxHkapkroMVsQbqVDX8ynuTCm2WXuEzv5nPH8cGJ+naBNKlsaebM7FmIb5u5F6qXnefFERG4kAThvwAAA"
   },
   "village-stationery-7": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAwAA4BaJQBYdiFv/e9e9TAA/uenSEUcYaafXLEoK2Pudac0Dk+DzqGA/qUiOjt6KriX+wrnHJ3LmLnvxzqTRl9zknBV//mMdhi9LgoUcOpo6UAAAA=="
   },
   "village-stationery-8": {
     "faceVisibility": "prominent",
-    "published": false
+    "published": true,
+    "redacted": true,
+    "width": 1600,
+    "height": 1200,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQAAwAA4BaJQBOgCIND8NuNXIFKAD+7dZSr7dFxfKhIvkVPzCHuhXEujPx333t0xEZ8RfYAvj9a++o69kOv8KbehCJQQAhN6pxqnbw8r+K16SiMwIBz261imMwAA=="
   }
 }

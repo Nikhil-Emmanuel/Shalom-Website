@@ -28,15 +28,17 @@ export const NAMES_POLICY = "no-child-names" as const;
 
 const ALLOWED_UNDER_PROTECT: readonly FaceVisibility[] = ["none", "incidental"];
 
+type PolicyFields = Pick<Photo, "faceVisibility" | "redacted">;
+
 /** Can this photograph be published under the active policy? */
-export function isPublishable(photo: Pick<Photo, "faceVisibility">): boolean {
+export function isPublishable(photo: PolicyFields): boolean {
   if (FACE_POLICY === "open") return true;
+  // Faces already obscured by scripts/redact_faces.py and checked by eye.
+  if (photo.redacted) return true;
   return ALLOWED_UNDER_PROTECT.includes(photo.faceVisibility);
 }
 
 /** Filters a set of photographs down to those the policy permits. */
-export function publishable<T extends Pick<Photo, "faceVisibility">>(
-  photos: readonly T[],
-): T[] {
+export function publishable<T extends PolicyFields>(photos: readonly T[]): T[] {
   return photos.filter(isPublishable);
 }

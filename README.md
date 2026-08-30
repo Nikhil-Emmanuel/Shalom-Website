@@ -19,6 +19,7 @@ npm run dev
 | `npm run build` | Production build |
 | `npm run typecheck` | TypeScript, strict |
 | `npm run lint` | ESLint |
+| `python scripts/redact_faces.py` | Obscure faces in photographs that need it |
 | `node scripts/prepare-media.mjs` | Re-optimise photographs into `public/media` |
 
 ## Stack
@@ -39,9 +40,24 @@ Every photograph is classified in `scripts/prepare-media.mjs`:
 | `incidental` | Children present, but nobody is an identifiable subject |
 | `prominent` | At least one child's face is clearly identifiable |
 
-Under the default `protect` policy, **`prominent` photographs are never written into `public/`**. This matters: filtering only at render time would still leave the file fetchable at a guessable URL. Currently 9 of 24 photographs are published. No child is ever named, under any policy.
+Under the default `protect` policy, **`prominent` photographs are never written into `public/`** unless they have been redacted. This matters: filtering only at render time would still leave the file fetchable at a guessable URL.
 
-To publish faces — **only** after the home gives written permission:
+Currently **21 of 24** photographs are published — 9 that needed no treatment, and 12 whose faces were obscured. No child is ever named, under any policy.
+
+### Redaction
+
+`scripts/redact_faces.py` detects faces (OpenCV YuNet) and destroys those regions — downsampled hard, then blurred, so they cannot be recovered by sharpening. Output goes to `MEDIA FILES/redacted/` for review; it is gitignored because it is rebuildable.
+
+**The detector is not the safety mechanism.** A missed face fails silently, because the image still looks processed and nobody re-checks it. So detection runs deliberately hot (low threshold, plus an upscaled pass for small faces; false positives only blur background) and every output must be checked by eye before its slug is added to `VERIFIED` in that script and `REDACTED` in `prepare-media.mjs`. Those two lists must stay in sync.
+
+Three photographs remain withheld: two large group shots where every face cannot be confirmed, and one where faces dominate the frame so heavily that redaction destroys the picture.
+
+```bash
+python scripts/redact_faces.py    # then LOOK at every image in MEDIA FILES/redacted/
+node scripts/prepare-media.mjs
+```
+
+To publish faces unredacted — **only** after the home gives written permission:
 
 1. Set `facePolicy` to `"open"` in `src/content/media.policy.json`
 2. Re-run `node scripts/prepare-media.mjs`
@@ -77,4 +93,4 @@ Without them the route returns a specific "unconfigured" response and the form f
 - **Bank / UPI details** — needed for any real donation flow (80G exemption applies; FCRA is *not* held, so donations are India-only)
 - **PIN code** — the sheet reads 570043, which is Mysuru; Hennur is 560043. Omitted from structured data until confirmed
 - Logo file, written photo policy, domain name, testimonials
-- Wide or back-turned photographs of the village tuition centres — every current image of that programme shows identifiable faces, so it has no photo
+- A written photo policy from the home would let us drop the redaction and use these photographs as they were taken

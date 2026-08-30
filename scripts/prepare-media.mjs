@@ -61,13 +61,40 @@ const FILES = [
   ["WhatsApp Image 2026-08-20 at 6.00.23 PM (1).jpeg", "village-stationery-8", "prominent"],
 ];
 
+/**
+ * Photographs whose faces have been redacted by scripts/redact_faces.py AND
+ * checked by eye afterwards — every child's face is either obscured or not
+ * visible, and the picture still reads. These publish despite being classified
+ * `prominent`, sourced from MEDIA FILES/redacted/ rather than the original.
+ *
+ * Must stay in sync with VERIFIED in redact_faces.py. Never add a slug here
+ * without looking at the redacted output first: the detector is a labour-saver,
+ * not the safety mechanism, and a missed face fails silently.
+ */
+const REDACTED = new Set([
+  "village-stationery-1",
+  "village-stationery-2",
+  "village-stationery-3",
+  "village-stationery-4",
+  "village-stationery-5",
+  "village-stationery-6",
+  "village-stationery-7",
+  "village-stationery-8",
+  "school-bus-lineup",
+  "school-bus-boarding",
+  "school-bus-inside",
+  "lunch-younger-children",
+]);
+
 const MAX_WIDTH = 2000;
 const PUBLISHABLE_UNDER_PROTECT = new Set(["none", "incidental"]);
 
 async function run() {
   const { facePolicy } = JSON.parse(await readFile(POLICY_FILE, "utf8"));
-  const publishes = (faceVisibility) =>
-    facePolicy === "open" || PUBLISHABLE_UNDER_PROTECT.has(faceVisibility);
+  const publishes = (faceVisibility, slug) =>
+    facePolicy === "open" ||
+    PUBLISHABLE_UNDER_PROTECT.has(faceVisibility) ||
+    REDACTED.has(slug);
 
   // Rebuilt from scratch so that tightening the policy actually removes files
   // that a previous, looser run had published.
@@ -79,15 +106,22 @@ async function run() {
   let withheld = 0;
 
   for (const [file, slug, faceVisibility] of FILES) {
-    if (!publishes(faceVisibility)) {
+    if (!publishes(faceVisibility, slug)) {
       // Recorded so the TS manifest still knows the photo exists and why it is
       // absent — but no file is emitted, so there is nothing to fetch.
-      manifest[slug] = { faceVisibility, published: false };
+      manifest[slug] = { faceVisibility, published: false, redacted: false };
       withheld += 1;
       continue;
     }
 
-    const buf = await readFile(path.join(SRC_DIR, file));
+    // Redacted photographs are read from the processed copy; the original —
+    // with faces intact — is never the source for anything under public/.
+    const isRedacted = facePolicy !== "open" && REDACTED.has(slug);
+    const source = isRedacted
+      ? path.join(SRC_DIR, "redacted", `${slug}.jpg`)
+      : path.join(SRC_DIR, file);
+
+    const buf = await readFile(source);
     const pipeline = sharp(buf).rotate(); // honour EXIF orientation
     const meta = await pipeline.metadata();
 
@@ -108,13 +142,14 @@ async function run() {
     manifest[slug] = {
       faceVisibility,
       published: true,
+      redacted: isRedacted,
       width: outMeta.width,
       height: outMeta.height,
       blurDataURL: `data:image/webp;base64,${blur.toString("base64")}`,
     };
 
     console.log(
-      `  published  ${slug.padEnd(28)} ${outMeta.width}x${outMeta.height}  ${(out.length / 1024).toFixed(0)}kb`,
+      `  ${(isRedacted ? "redacted " : "published").padEnd(10)} ${slug.padEnd(28)} ${outMeta.width}x${outMeta.height}  ${(out.length / 1024).toFixed(0)}kb`,
     );
   }
 

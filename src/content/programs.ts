@@ -45,7 +45,7 @@ export const programs: Program[] = [
     summary: "Fifty-seven children taught after school, in their own villages.",
     body: "Not every child needs to leave home — some just need someone to teach them after school and put a pen in their hand. Our village centres reach fifty-seven young people, with tuition, notebooks and stationery, so that they can stay with their families and still keep up.",
     icon: "BookOpen",
-    photo: null,
+    photo: "village-stationery-7",
   },
   {
     slug: "sport",

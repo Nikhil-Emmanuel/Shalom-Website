@@ -29,10 +29,11 @@ export default function GalleryPage() {
           <p className="mt-14 flex max-w-2xl items-start gap-3 rounded-xl border border-hairline bg-surface-soft p-5 text-sm leading-relaxed text-muted">
             <Icon name="ShieldCheck" className="mt-0.5 size-4 shrink-0 text-primary" />
             <span>
-              We publish photographs that do not identify the children in our
-              care, and we never publish their names. This is a deliberate
-              safeguarding choice, and it is why you will see more wide shots
-              here than faces.
+              We do not publish photographs that identify the children in our
+              care, and we never publish their names. Where a child&rsquo;s face
+              would be recognisable we obscure it, and some photographs we hold
+              back altogether. It is a deliberate choice, and it is why you will
+              see more wide shots and blurred faces here than portraits.
             </span>
           </p>
         </Container>
