@@ -41,6 +41,8 @@ export const photoSchema = z.object({
   faceVisibility: faceVisibilitySchema,
   /** True when faces were obscured so the photo could be published safely. */
   redacted: z.boolean(),
+  /** Published unredacted by explicit instruction, overriding the policy. */
+  explicitOverride: z.boolean(),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
   blurDataURL: z.string(),

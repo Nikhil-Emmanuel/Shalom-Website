@@ -33,18 +33,17 @@ export const site: Site = siteSchema.parse({
     lines: ["Shalom Ashram", "No. 19, 6th Cross Road, Sai Layout", "Vadrapalaya, Horamavu Agara Road"],
     locality: "Bangalore",
     region: "Karnataka",
-    // The sheet reads 570043, which is a Mysuru code — Hennur is 560043.
-    // Left null until the home confirms, so we never publish a wrong PIN.
-    postalCode: null,
+    // The information sheet read 570043 (a Mysuru code); confirmed as the
+    // Hennur code below.
+    postalCode: "560043",
     country: "IN",
     mapsUrl: null,
   },
 
   contact: {
     emails: ["pgsamuel07@gmail.com", "lakshanyango@gmail.com"],
-    // The sheet listed contact *channels* rather than a number.
-    phone: null,
-    whatsapp: null,
+    phone: "+91 94805 11642",
+    whatsapp: "+91 94805 11642",
   },
 
   social: {
@@ -58,6 +57,12 @@ export const site: Site = siteSchema.parse({
     slots: ["Weekday evenings, 5–6 pm", "Saturday and Sunday afternoons"],
   },
 });
+
+/** Studio credit, shown in the footer and emitted in structured data. */
+export const builtBy = {
+  name: "Nevark Technologies",
+  llpin: "ACP-8830",
+} as const;
 
 export const founder = {
   name: "Samuel P. G.",

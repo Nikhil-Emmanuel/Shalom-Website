@@ -177,6 +177,7 @@ type GeneratedEntry = {
   faceVisibility: string;
   published: boolean;
   redacted: boolean;
+  explicitOverride: boolean;
   width?: number;
   height?: number;
   blurDataURL?: string;
@@ -204,6 +205,7 @@ function build(): Photo[] {
           : entry.alt,
         faceVisibility: faceVisibilitySchema.parse(meta.faceVisibility),
         redacted: meta.redacted,
+        explicitOverride: meta.explicitOverride,
         src: `/media/${entry.slug}.jpg`,
         width: meta.width,
         height: meta.height,

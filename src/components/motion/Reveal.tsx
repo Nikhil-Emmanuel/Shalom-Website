@@ -3,7 +3,7 @@
 import { useRef, type ElementType, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useIsomorphicLayoutEffect, prefersReducedMotion } from "@/lib/motion";
+import { useIsomorphicLayoutEffect, motionLevel, whenVisible } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
@@ -33,29 +33,33 @@ export function Reveal({
 
   useIsomorphicLayoutEffect(() => {
     const el = ref.current;
-    if (!el || prefersReducedMotion()) return;
+    if (!el) return;
 
     gsap.registerPlugin(ScrollTrigger);
+    const reduced = motionLevel() === "reduced";
+    let ctx: gsap.Context | undefined;
 
-    const ctx = gsap.context(() => {
-      const targets = stagger ? Array.from(el.children) : el;
+    const cancel = whenVisible(() => {
+      ctx = gsap.context(() => {
+        const targets = stagger ? Array.from(el.children) : el;
 
-      gsap.from(targets, {
-        opacity: 0,
-        y,
-        duration: 0.7,
-        delay,
-        ease: "power3.out",
-        stagger: stagger ? 0.08 : 0,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          once: true,
-        },
-      });
-    }, el);
+        gsap.from(targets, {
+          opacity: 0,
+          // Fade only when movement is unwelcome; never travel the screen.
+          y: reduced ? 0 : y,
+          duration: reduced ? 0.5 : 0.7,
+          delay,
+          ease: "power3.out",
+          stagger: stagger ? 0.08 : 0,
+          scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        });
+      }, el);
+    });
 
-    return () => ctx.revert();
+    return () => {
+      cancel();
+      ctx?.revert();
+    };
   }, [delay, stagger, y]);
 
   return (

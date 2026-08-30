@@ -86,6 +86,15 @@ const REDACTED = new Set([
   "lunch-younger-children",
 ]);
 
+/**
+ * Published from the ORIGINAL, unredacted photograph at the client's explicit
+ * instruction, overriding the classification.
+ *
+ * This shows an identifiable child. It needs the home's written consent before
+ * the site goes live — see the note in README under Child safeguarding.
+ */
+const UNREDACTED_OVERRIDE = new Set(["village-stationery-7"]);
+
 const MAX_WIDTH = 2000;
 const PUBLISHABLE_UNDER_PROTECT = new Set(["none", "incidental"]);
 
@@ -94,7 +103,8 @@ async function run() {
   const publishes = (faceVisibility, slug) =>
     facePolicy === "open" ||
     PUBLISHABLE_UNDER_PROTECT.has(faceVisibility) ||
-    REDACTED.has(slug);
+    REDACTED.has(slug) ||
+    UNREDACTED_OVERRIDE.has(slug);
 
   // Rebuilt from scratch so that tightening the policy actually removes files
   // that a previous, looser run had published.
@@ -109,14 +119,22 @@ async function run() {
     if (!publishes(faceVisibility, slug)) {
       // Recorded so the TS manifest still knows the photo exists and why it is
       // absent — but no file is emitted, so there is nothing to fetch.
-      manifest[slug] = { faceVisibility, published: false, redacted: false };
+      manifest[slug] = {
+        faceVisibility,
+        published: false,
+        redacted: false,
+        explicitOverride: false,
+      };
       withheld += 1;
       continue;
     }
 
     // Redacted photographs are read from the processed copy; the original —
     // with faces intact — is never the source for anything under public/.
-    const isRedacted = facePolicy !== "open" && REDACTED.has(slug);
+    const isRedacted =
+      facePolicy !== "open" &&
+      REDACTED.has(slug) &&
+      !UNREDACTED_OVERRIDE.has(slug);
     const source = isRedacted
       ? path.join(SRC_DIR, "redacted", `${slug}.jpg`)
       : path.join(SRC_DIR, file);
@@ -143,6 +161,7 @@ async function run() {
       faceVisibility,
       published: true,
       redacted: isRedacted,
+      explicitOverride: UNREDACTED_OVERRIDE.has(slug),
       width: outMeta.width,
       height: outMeta.height,
       blurDataURL: `data:image/webp;base64,${blur.toString("base64")}`,

@@ -28,13 +28,19 @@ export const NAMES_POLICY = "no-child-names" as const;
 
 const ALLOWED_UNDER_PROTECT: readonly FaceVisibility[] = ["none", "incidental"];
 
-type PolicyFields = Pick<Photo, "faceVisibility" | "redacted">;
+type PolicyFields = Pick<
+  Photo,
+  "faceVisibility" | "redacted" | "explicitOverride"
+>;
 
 /** Can this photograph be published under the active policy? */
 export function isPublishable(photo: PolicyFields): boolean {
   if (FACE_POLICY === "open") return true;
   // Faces already obscured by scripts/redact_faces.py and checked by eye.
   if (photo.redacted) return true;
+  // Released unredacted by explicit client instruction. Needs the home's
+  // written consent before launch — see UNREDACTED_OVERRIDE in prepare-media.
+  if (photo.explicitOverride) return true;
   return ALLOWED_UNDER_PROTECT.includes(photo.faceVisibility);
 }
 

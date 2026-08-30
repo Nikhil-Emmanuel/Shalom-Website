@@ -2,6 +2,8 @@
   "name": "shalom-childrens-home",
   "version": "0.1.0",
   "private": true,
+  "description": "Website for Shalom Children's Home, Hennur, Bangalore",
+  "author": "Nevark Technologies (LLPIN: ACP-8830)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

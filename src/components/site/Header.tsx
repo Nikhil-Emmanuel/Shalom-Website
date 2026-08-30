@@ -41,11 +41,10 @@ export function Header() {
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-display text-lg leading-none font-semibold text-ink"
+          className="font-display text-base leading-none font-semibold tracking-[-0.01em] text-ink sm:text-lg"
         >
-          {site.shortName}
+          {site.name}
           <span className="text-primary">.</span>
-          <span className="sr-only"> {site.name} — home</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">

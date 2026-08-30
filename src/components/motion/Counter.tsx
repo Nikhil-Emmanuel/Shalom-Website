@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useIsomorphicLayoutEffect, prefersReducedMotion } from "@/lib/motion";
+import { useIsomorphicLayoutEffect, motionLevel, whenVisible } from "@/lib/motion";
 
 type CounterProps = {
   value: number;
@@ -21,24 +21,34 @@ export function Counter({ value, suffix = "", className }: CounterProps) {
 
   useIsomorphicLayoutEffect(() => {
     const el = ref.current;
-    if (!el || prefersReducedMotion()) return;
+    if (!el) return;
 
     gsap.registerPlugin(ScrollTrigger);
+    // A number ticking up changes text, it does not move anything — safe to
+    // keep when motion is reduced, just quicker.
+    const duration = motionLevel() === "reduced" ? 0.9 : 1.6;
 
-    const ctx = gsap.context(() => {
-      const counter = { n: 0 };
-      gsap.to(counter, {
-        n: value,
-        duration: 1.6,
-        ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 90%", once: true },
-        onUpdate: () => {
-          el.textContent = `${Math.round(counter.n)}${suffix}`;
-        },
-      });
-    }, el);
+    let ctx: gsap.Context | undefined;
 
-    return () => ctx.revert();
+    const cancel = whenVisible(() => {
+      ctx = gsap.context(() => {
+        const counter = { n: 0 };
+        gsap.to(counter, {
+          n: value,
+          duration,
+          ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true },
+          onUpdate: () => {
+            el.textContent = `${Math.round(counter.n)}${suffix}`;
+          },
+        });
+      }, el);
+    });
+
+    return () => {
+      cancel();
+      ctx?.revert();
+    };
   }, [value, suffix]);
 
   return (

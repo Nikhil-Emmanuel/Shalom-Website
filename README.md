@@ -1,5 +1,7 @@
 # Shalom Children's Home
 
+Developed and powered by **Nevark Technologies** (LLPIN: ACP-8830).
+
 Website for Shalom Children's Home, a registered children's home in Hennur, Bangalore. Thirty children live at the home; fifty-seven more are taught at village tuition centres nearby.
 
 The site exists to make the home findable and to convert visitors into volunteers, sponsors and donors.
@@ -75,6 +77,17 @@ src/
 Components never import content files directly; everything goes through `getContent()` in `src/content/index.ts`. A CMS can replace the file-backed source by changing that one module.
 
 Animation is progressive enhancement throughout. The pinned horizontal "A Day at Shalom" section on the home page renders as a plain grid on the server and only becomes a horizontal track when the viewport is wide enough *and* the visitor has not requested reduced motion — enhancement is never load-bearing for content.
+
+Motion has **two tiers** rather than an on/off switch (`motionLevel()` in `src/lib/motion.ts`):
+
+| Tier | Behaviour |
+| --- | --- |
+| `full` | Parallax, pinning, scrubbed transforms, slide-in headlines |
+| `reduced` | Opacity only — fades and counters still run, nothing travels |
+
+`prefers-reduced-motion` asks us to cut *motion*, not all animation, and it is switched on far more often than people realise (Windows "Show animations" off, macOS "Reduce motion"). A blanket kill-switch made the site look broken for those visitors.
+
+Entrance animations are also deferred until the document is visible (`whenVisible()`). Browsers suspend `requestAnimationFrame` in hidden tabs, so building an `opacity: 0` timeline there would leave content invisible with nothing scheduled to reveal it.
 
 ## Contact form
 

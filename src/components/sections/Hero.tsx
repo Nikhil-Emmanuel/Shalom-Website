@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { SafeImage } from "@/components/media/SafeImage";
 import { Icon } from "@/components/ui/Icon";
-import { useIsomorphicLayoutEffect, prefersReducedMotion } from "@/lib/motion";
+import { useIsomorphicLayoutEffect, motionLevel, whenVisible } from "@/lib/motion";
 
 /**
  * Editorial hero: a serif headline set against a parallaxing cluster of three
@@ -25,16 +25,30 @@ export function Hero({ photos }: { photos: Photo[] }) {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion()) return;
+    const reduced = motionLevel() === "reduced";
+    let ctx: gsap.Context | undefined;
 
-      gsap
-        .timeline({ defaults: { ease: "power3.out" } })
-        .from("[data-hero-line]", {
-          yPercent: 110,
-          duration: 1,
-          stagger: 0.09,
-        })
+    const cancel = whenVisible(() => {
+      ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      if (reduced) {
+        // Same choreography and rhythm, expressed purely in opacity.
+        tl.from("[data-hero-line]", { opacity: 0, duration: 0.6, stagger: 0.1 })
+          .from(
+            "[data-hero-fade]",
+            { opacity: 0, duration: 0.5, stagger: 0.09 },
+            "-=0.35",
+          )
+          .from(
+            "[data-hero-photo]",
+            { opacity: 0, duration: 0.7, stagger: 0.12 },
+            "-=0.5",
+          );
+        return;
+      }
+
+      tl.from("[data-hero-line]", { yPercent: 110, duration: 1, stagger: 0.09 })
         .from(
           "[data-hero-fade]",
           { opacity: 0, y: 20, duration: 0.7, stagger: 0.1 },
@@ -60,9 +74,13 @@ export function Hero({ photos }: { photos: Photo[] }) {
           },
         });
       });
-    }, el);
+      }, el);
+    });
 
-    return () => ctx.revert();
+    return () => {
+      cancel();
+      ctx?.revert();
+    };
   }, []);
 
   return (

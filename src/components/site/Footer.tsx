@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/content/site";
+import { site, builtBy } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 
@@ -101,11 +101,17 @@ export function Footer() {
               ? ` · ${registration.taxExemption} tax exemption`
               : ""}
           </p>
-          <p>
-            © {year} {site.name}.{" "}
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>© {year} {site.name}.</span>
             <Link href="/privacy" className="underline-offset-4 hover:underline">
               Child protection &amp; privacy
             </Link>
+            <span aria-hidden>·</span>
+            <span>
+              Developed and powered by{" "}
+              <span className="font-medium text-body">{builtBy.name}</span>{" "}
+              <span className="whitespace-nowrap">(LLPIN {builtBy.llpin})</span>
+            </span>
           </p>
         </Container>
       </div>

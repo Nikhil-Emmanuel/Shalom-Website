@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { mission } from "@/content/home";
 import { Container } from "@/components/ui/Container";
-import { useIsomorphicLayoutEffect, prefersReducedMotion } from "@/lib/motion";
+import { useIsomorphicLayoutEffect, whenVisible } from "@/lib/motion";
 
 /**
  * Scrubbed word-by-word reveal: the lead sentence brightens as the section
@@ -21,27 +21,33 @@ export function Mission() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion()) return;
+    // Opacity only — nothing moves — so this runs at both motion tiers.
+    let ctx: gsap.Context | undefined;
 
-      gsap.fromTo(
-        "[data-word]",
-        { opacity: 0.18 },
-        {
-          opacity: 1,
-          ease: "none",
-          stagger: 0.5,
-          scrollTrigger: {
-            trigger: el,
-            start: "top 75%",
-            end: "bottom 70%",
-            scrub: true,
+    const cancel = whenVisible(() => {
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          "[data-word]",
+          { opacity: 0.18 },
+          {
+            opacity: 1,
+            ease: "none",
+            stagger: 0.5,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 75%",
+              end: "bottom 70%",
+              scrub: true,
+            },
           },
-        },
-      );
-    }, el);
+        );
+      }, el);
+    });
 
-    return () => ctx.revert();
+    return () => {
+      cancel();
+      ctx?.revert();
+    };
   }, []);
 
   return (

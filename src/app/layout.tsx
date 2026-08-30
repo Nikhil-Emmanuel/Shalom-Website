@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { site } from "@/content/site";
-import { organisationJsonLd } from "@/lib/seo";
+import { organisationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -60,7 +60,7 @@ export default function RootLayout({
           type="application/ld+json"
           // Structured data is static and built from our own content — safe.
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organisationJsonLd()),
+            __html: JSON.stringify([organisationJsonLd(), websiteJsonLd()]),
           }}
         />
         <a

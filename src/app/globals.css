@@ -122,17 +122,26 @@
 }
 
 /*
- * Accessibility: honour the OS-level motion preference globally. Individual GSAP
- * timelines also check this via lib/motion.ts, but this is the backstop that
- * catches CSS transitions and any effect added later.
+ * Accessibility: honour the OS-level motion preference — but cut motion, not
+ * every animation.
+ *
+ * The usual blanket rule (transition-duration: 0.01ms on everything) also kills
+ * hover and focus transitions, which are colour changes rather than movement.
+ * That makes the interface feel broken for the many people who have reduce
+ * motion switched on without thinking about it — Windows "Show animations" off,
+ * or macOS "Reduce motion". So here we stop looping animations and any
+ * transform-based transition, and leave colour, opacity and shadow alone.
+ *
+ * GSAP timelines run outside CSS and handle this themselves via
+ * lib/motion.ts `motionLevel()`.
  */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-property: color, background-color, border-color, outline-color,
+      fill, stroke, opacity, box-shadow !important;
     scroll-behavior: auto !important;
   }
 }

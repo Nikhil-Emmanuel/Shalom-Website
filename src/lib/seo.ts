@@ -1,4 +1,4 @@
-import { site, founder } from "@/content/site";
+import { site, founder, builtBy } from "@/content/site";
 
 /**
  * JSON-LD for the home. Visibility is the entire point of this project, so the
@@ -18,6 +18,7 @@ export function organisationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "NGO",
+    "@id": `${site.url}#organisation`,
     name: site.name,
     alternateName: "Shalom Ashram",
     description: site.description,
@@ -43,5 +44,23 @@ export function organisationJsonLd() {
       "village tuition centres",
     ],
     areaServed: { "@type": "City", name: "Bangalore" },
+  };
+}
+
+/** The site itself, and who built it. */
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${site.url}#website`,
+    url: site.url,
+    name: site.name,
+    inLanguage: "en-IN",
+    publisher: { "@id": `${site.url}#organisation` },
+    creator: {
+      "@type": "Organization",
+      name: builtBy.name,
+      identifier: `LLPIN ${builtBy.llpin}`,
+    },
   };
 }
