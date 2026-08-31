@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
+import { VisitMap } from "@/components/sections/VisitMap";
 
 export const metadata: Metadata = {
   title: "Visit us",
@@ -41,9 +42,17 @@ export default function ContactPage() {
                 </span>
                 <span className="block">{address.region}</span>
               </address>
-              <p className="mt-3 text-sm text-muted">
-                Near Shirdi Sai Temple, Hennur Cross.
-              </p>
+              {address.mapsUrl && (
+                <a
+                  href={address.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Open in Google Maps
+                  <Icon name="ArrowUpRight" className="size-3.5" />
+                </a>
+              )}
             </div>
 
             <div>
@@ -113,6 +122,15 @@ export default function ContactPage() {
             <div className="mt-8">
               <EnquiryForm />
             </div>
+          </div>
+        </Container>
+
+        <Container className="mt-16 lg:mt-20">
+          <h2 className="font-sans text-xs font-semibold tracking-[0.14em] text-muted uppercase">
+            Find us on the map
+          </h2>
+          <div className="mt-4">
+            <VisitMap />
           </div>
         </Container>
       </section>

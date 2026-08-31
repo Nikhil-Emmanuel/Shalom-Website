@@ -60,6 +60,12 @@ export default function PrivacyPage() {
               add you to a mailing list without asking.
             </p>
             <p className="mt-4 leading-relaxed">
+              Our visit page embeds a Google map so you can find us. Loading it
+              means Google may set cookies in your browser, as it would on any
+              site showing a map. Nothing you type into our forms is shared with
+              them.
+            </p>
+            <p className="mt-4 leading-relaxed">
               To have your details removed from our records, email{" "}
               <a
                 href={`mailto:${site.contact.emails[0]}`}

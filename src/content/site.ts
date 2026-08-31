@@ -37,7 +37,9 @@ export const site: Site = siteSchema.parse({
     // Hennur code below.
     postalCode: "560043",
     country: "IN",
-    mapsUrl: null,
+    mapsUrl:
+      "https://www.google.com/maps/place/Shalom+Children's+Home/@13.0411968,77.645622,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae174905d95bdb:0x751e1bb538f2ec0!8m2!3d13.0411968!4d77.645622!16s%2Fg%2F11cmc48cwb",
+    geo: { lat: 13.0411968, lng: 77.645622 },
   },
 
   contact: {

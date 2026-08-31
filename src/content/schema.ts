@@ -70,6 +70,10 @@ export const siteSchema = z.object({
     postalCode: z.string().nullable(),
     country: z.string(),
     mapsUrl: z.string().url().nullable(),
+    /** Confirmed pin, used for the embedded map and for JSON-LD `geo`. */
+    geo: z
+      .object({ lat: z.number(), lng: z.number() })
+      .nullable(),
   }),
   contact: z.object({
     emails: z.array(z.string().email()).min(1),

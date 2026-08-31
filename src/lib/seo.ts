@@ -36,6 +36,16 @@ export function organisationJsonLd() {
       ...(address.postalCode ? { postalCode: address.postalCode } : {}),
       addressCountry: address.country,
     },
+    ...(address.geo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: address.geo.lat,
+            longitude: address.geo.lng,
+          },
+        }
+      : {}),
+    ...(address.mapsUrl ? { hasMap: address.mapsUrl } : {}),
     identifier: registration.number,
     knowsAbout: [
       "child welfare",
