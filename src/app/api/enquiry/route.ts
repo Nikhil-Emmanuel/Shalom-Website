@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
-import { enquirySchema, intentLabel } from "@/lib/enquiry";
-import { site } from "@/content/site";
+import { enquirySchema } from "@/lib/enquiry";
+import { deliverEnquiry } from "@/lib/mailer";
 
 /**
  * Receives an enquiry and emails it to the home.
  *
- * Delivery needs RESEND_API_KEY and ENQUIRY_FROM_EMAIL. Until those are set,
- * the route replies with `mailUnconfigured` so the form can fall back to a
- * prefilled mailto link — a message must never be accepted and then silently
- * dropped, which for this organisation could mean a lost donor.
+ * Delivery lives in lib/mailer.ts. Until a provider is configured this replies
+ * with `mailUnconfigured` so the form can fall back to a prefilled mailto — a
+ * message must never be accepted and then silently dropped, which for this
+ * organisation could mean a lost donor.
  */
 export async function POST(request: Request) {
   let payload: unknown;
@@ -26,48 +26,22 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, phone, intent, message, website } = parsed.data;
-
   // Honeypot tripped — accept silently so the bot learns nothing.
-  if (website) return NextResponse.json({ ok: true });
+  if (parsed.data.website) return NextResponse.json({ ok: true });
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.ENQUIRY_FROM_EMAIL;
+  const result = await deliverEnquiry(parsed.data);
 
-  if (!apiKey || !from) {
+  if (result.status === "unconfigured") {
     return NextResponse.json(
       { error: "mailUnconfigured", mailUnconfigured: true },
       { status: 503 },
     );
   }
 
-  const body = [
-    `Intent: ${intentLabel(intent)}`,
-    `Name: ${name}`,
-    `Email: ${email}`,
-    phone ? `Phone: ${phone}` : null,
-    "",
-    message,
-  ]
-    .filter((line) => line !== null)
-    .join("\n");
-
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: site.contact.emails,
-      reply_to: email,
-      subject: `${site.shortName} website — ${intentLabel(intent)} — ${name}`,
-      text: body,
-    }),
-  });
-
-  if (!response.ok) {
+  if (result.status === "failed") {
+    // Logged for whoever maintains the site; never shown to the visitor, since
+    // provider errors leak configuration detail and mean nothing to them.
+    console.error("[enquiry] delivery failed:", result.detail);
     return NextResponse.json(
       { error: "We could not send that just now. Please email us directly." },
       { status: 502 },

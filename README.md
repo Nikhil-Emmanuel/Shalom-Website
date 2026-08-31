@@ -76,34 +76,33 @@ src/
 
 Components never import content files directly; everything goes through `getContent()` in `src/content/index.ts`. A CMS can replace the file-backed source by changing that one module.
 
-Animation is progressive enhancement throughout. The pinned horizontal "A Day at Shalom" section on the home page renders as a plain grid on the server and only becomes a horizontal track when the viewport is wide enough *and* the visitor has not requested reduced motion — enhancement is never load-bearing for content.
+Animation is progressive enhancement throughout. The pinned horizontal "A Day at Shalom" section renders as a plain grid on the server and only becomes a horizontal track above 768px — enhancement is never load-bearing for content.
 
-Motion has **two tiers** rather than an on/off switch (`motionLevel()` in `src/lib/motion.ts`):
+**Motion is not gated on `prefers-reduced-motion`**, by instruction: the site runs full motion on any device that can render it. `motionLevel()` in `src/lib/motion.ts` always returns `full` and is the single place that decision lives — reverse it there. `prefersReducedMotion()` remains as an honest read of the media query but is wired to nothing.
 
-| Tier | Behaviour |
-| --- | --- |
-| `full` | Parallax, pinning, scrubbed transforms, slide-in headlines |
-| `reduced` | Opacity only — fades and counters still run, nothing travels |
+Framer Motion drives scroll reveals, the mobile nav drawer and the gallery lightbox. GSAP keeps the pinned journey (ScrollTrigger's `pin` has no Framer Motion equivalent) and the hero timeline (synced to Lenis through GSAP's ticker).
 
-`prefers-reduced-motion` asks us to cut *motion*, not all animation, and it is switched on far more often than people realise (Windows "Show animations" off, macOS "Reduce motion"). A blanket kill-switch made the site look broken for those visitors.
+`Reveal` hides content from an effect rather than via a server-rendered `initial` style, so no-JS, crawlers and hidden tabs all get the finished markup. It has twice regressed to leaving content permanently invisible; that ordering is what prevents it.
 
-Entrance animations are also deferred until the document is visible (`whenVisible()`). Browsers suspend `requestAnimationFrame` in hidden tabs, so building an `opacity: 0` timeline there would leave content invisible with nothing scheduled to reveal it.
+Entrance animations are deferred until the document is visible (`whenVisible()`). Browsers suspend `requestAnimationFrame` in hidden tabs, so building an `opacity: 0` timeline there would leave content invisible with nothing scheduled to reveal it.
 
 ## Contact form
 
-`POST /api/enquiry` emails the home via Resend. It needs:
+`POST /api/enquiry` validates the submission and hands it to `src/lib/mailer.ts`, which picks a provider from the environment. Copy `.env.example` to `.env.local` and fill in **one** of them.
 
-```
-RESEND_API_KEY=
-ENQUIRY_FROM_EMAIL=
-```
+**Web3Forms — recommended for now.** Create a free access key at [web3forms.com](https://web3forms.com) using the home's Gmail address; the key arrives in that inbox. Set `WEB3FORMS_ACCESS_KEY` and the form is live. No domain, no DNS, nothing to renew.
 
-Without them the route returns a specific "unconfigured" response and the form falls back to a prefilled `mailto:` link. A message is never accepted and then silently dropped.
+**Resend — better once the home owns a domain.** Set `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL`. Resend refuses to send to arbitrary recipients until a domain is verified in its dashboard, which is why it is not the default.
+
+Either way `reply-to` is the sender's address, so hitting Reply in Gmail goes straight back to them.
+
+With neither set, the route returns an "unconfigured" response and the form offers a prefilled `mailto:` link instead. A message is never accepted and then silently dropped.
+
+The hidden `website` field is a honeypot. It is intentionally permissive in the schema: validating it as `max(0)` made a filled honeypot fail validation and return the ordinary error, telling a bot its submission was rejected. The route now accepts it and returns `200` silently.
 
 ## Outstanding before launch
 
-- **Phone number** — the home listed contact channels, not a number
+- **Contact form email** — set `WEB3FORMS_ACCESS_KEY` in `.env.local`, or the form falls back to `mailto:`
 - **Bank / UPI details** — needed for any real donation flow (80G exemption applies; FCRA is *not* held, so donations are India-only)
-- **PIN code** — the sheet reads 570043, which is Mysuru; Hennur is 560043. Omitted from structured data until confirmed
 - Logo file, written photo policy, domain name, testimonials
 - A written photo policy from the home would let us drop the redaction and use these photographs as they were taken

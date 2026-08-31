@@ -20,8 +20,16 @@ export const enquirySchema = z.object({
     .trim()
     .min(10, "A sentence or two is plenty — just tell us how you'd like to help.")
     .max(2000),
-  /** Honeypot: real people leave this empty. */
-  website: z.string().max(0).optional().or(z.literal("")),
+  /**
+   * Honeypot: real people leave this empty.
+   *
+   * Deliberately permissive. Validating it as `max(0)` made a filled honeypot
+   * fail schema validation, so the request 400'd with the ordinary "check the
+   * form" error and the silent-accept branch in the route never ran — telling
+   * a bot its submission was rejected, which is the one thing a honeypot is
+   * meant not to do. Accept the value here; the route decides what it means.
+   */
+  website: z.string().max(200).optional(),
 });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;

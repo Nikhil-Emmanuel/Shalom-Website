@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enquirySchema, INTENTS, intentLabel, type EnquiryInput } from "@/lib/enquiry";
@@ -17,6 +17,14 @@ type Status =
 
 export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: string }) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // The form unmounts on success, which drops focus to the top of the document
+  // and tells a screen-reader user nothing about what just happened. Move focus
+  // onto the confirmation instead.
+  useEffect(() => {
+    if (status.kind === "sent") successRef.current?.focus();
+  }, [status.kind]);
 
   const {
     register,
@@ -83,7 +91,13 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
 
   if (status.kind === "sent") {
     return (
-      <div className="rounded-2xl border border-green/30 bg-green/5 p-8">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        className="rounded-2xl border border-green/30 bg-green/5 p-8"
+      >
         <p className="font-display text-xl font-semibold text-ink">
           Thank you — that reached us.
         </p>
