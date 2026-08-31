@@ -19,21 +19,20 @@ export function prefersReducedMotion(): boolean {
 }
 
 /**
- * Two tiers rather than on/off.
+ * Always "full" — deliberately not derived from `prefersReducedMotion()`.
  *
- *   full     everything — parallax, pinning, scrubbed transforms, slides
- *   reduced  opacity only, no movement
- *
- * `prefers-reduced-motion` asks us to cut *motion*, not all animation. Fading
- * something in does not move it across the screen and does not trigger
- * vestibular symptoms, so the reduced tier keeps fades and drops every
- * transform. Anything that physically travels — parallax, the pinned journey —
- * is gated on `full` and simply never runs otherwise.
+ * This site used to drop to opacity-only animation and disable parallax,
+ * pinning and the "A Day at Shalom" scroll journey whenever the OS-level
+ * motion preference was on — which, per instruction, is not what this site
+ * should do: animation should run at full richness on any device capable of
+ * rendering it, regardless of that accessibility toggle. `prefersReducedMotion`
+ * is kept below as an honest read of the media query in case a future,
+ * specific decision needs it — it is just no longer wired to this gate.
  */
 export type MotionLevel = "full" | "reduced";
 
 export function motionLevel(): MotionLevel {
-  return prefersReducedMotion() ? "reduced" : "full";
+  return "full";
 }
 
 /**

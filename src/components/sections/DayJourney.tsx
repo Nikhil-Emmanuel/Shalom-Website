@@ -13,14 +13,16 @@ import { cn } from "@/lib/utils";
  * "A Day at Shalom" — the signature interaction.
  *
  * Progressive enhancement, deliberately: the server renders a plain grid in
- * which every panel is reachable. Only when the viewport is wide enough AND the
- * visitor has not asked for reduced motion do we switch to the pinned
- * horizontal track.
+ * which every panel is reachable. Only when the viewport is wide enough do we
+ * switch to the pinned horizontal track — narrow viewports keep the grid
+ * because pinning a horizontal scroll there is bad UX regardless of motion
+ * preference, not because of the OS-level reduced-motion setting, which no
+ * longer gates this (see lib/motion.ts).
  *
  * This ordering matters. An earlier version applied the horizontal layout in
- * CSS and relied on the pin to scroll it — so when the pin did not run
- * (reduced motion), half the panels sat inside an overflow-hidden track with no
- * way to reach them. Enhancement must never be load-bearing for content.
+ * CSS and relied on the pin to scroll it — so when the pin did not run, half
+ * the panels sat inside an overflow-hidden track with no way to reach them.
+ * Enhancement must never be load-bearing for content.
  */
 export function DayJourney({ stops }: { stops: ResolvedJourneyStop[] }) {
   const section = useRef<HTMLElement>(null);
@@ -29,9 +31,7 @@ export function DayJourney({ stops }: { stops: ResolvedJourneyStop[] }) {
   const [enhanced, setEnhanced] = useState(false);
 
   useEffect(() => {
-    const query = window.matchMedia(
-      "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-    );
+    const query = window.matchMedia("(min-width: 768px)");
     const update = () => setEnhanced(query.matches);
     update();
     query.addEventListener("change", update);

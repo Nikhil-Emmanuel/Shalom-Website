@@ -177,42 +177,9 @@
 }
 
 /*
- * Accessibility: honour the OS-level motion preference — but cut motion, not
- * every animation.
- *
- * The usual blanket rule (transition-duration: 0.01ms on everything) also kills
- * hover and focus transitions, which are colour changes rather than movement.
- * That makes the interface feel broken for the many people who have reduce
- * motion switched on without thinking about it — Windows "Show animations" off,
- * or macOS "Reduce motion".
- *
- * So this stops looping animations and strips travel from the scroll reveals,
- * and leaves everything else alone. Transitions in this codebase are already
- * narrowly scoped by Tailwind (`transition-colors`, `transition-shadow`), and
- * the few transform ones are hover-initiated micro-interactions rather than
- * unprompted motion. An earlier version forced `transition-property` globally
- * with !important, which quietly added an opacity transition to anything
- * carrying a `duration-*` utility — enough to make a reveal fade out on mount.
- *
- * GSAP timelines run outside CSS and handle this themselves via
- * lib/motion.ts `motionLevel()`.
+ * No `@media (prefers-reduced-motion: reduce)` block, by instruction: this
+ * site runs full motion — loops, parallax, pinning, the scroll journey —
+ * regardless of that OS-level accessibility toggle, on any device capable of
+ * rendering it. See lib/motion.ts `motionLevel()`, which is the single place
+ * that decision is recorded and where it would be reversed if that changes.
  */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-  }
-
-  /* Reveals fade rather than travel. */
-  [data-reveal] {
-    transform: none !important;
-  }
-
-  /* A looping figure in the periphery is precisely what this setting is for. */
-  .motif-drift,
-  .motif-sway {
-    animation: none !important;
-  }
-}

@@ -4,15 +4,14 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { prefersReducedMotion } from "@/lib/motion";
 
 /**
  * Drives Lenis smooth scrolling and hands scroll control to GSAP's ticker so
  * ScrollTrigger stays in sync with the eased scroll position. Without this,
  * pinned sections drift from the pointer.
  *
- * Skipped entirely when the user prefers reduced motion — native scrolling is
- * left alone.
+ * Runs unconditionally — the OS-level reduced-motion preference no longer
+ * gates this, per instruction (see lib/motion.ts).
  */
 export function SmoothScroll() {
   useEffect(() => {
@@ -28,9 +27,6 @@ export function SmoothScroll() {
     document.fonts?.ready.then(refresh);
 
     const detachRefresh = () => window.removeEventListener("load", refresh);
-
-    // Lenis is smooth scrolling — that part is genuinely motion, so it stays off.
-    if (prefersReducedMotion()) return detachRefresh;
 
     const lenis = new Lenis({
       duration: 1.1,
