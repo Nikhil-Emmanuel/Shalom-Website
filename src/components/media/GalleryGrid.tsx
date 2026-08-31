@@ -1,6 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
+import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import type { Photo, PhotoCategory } from "@/content/schema";
 import { SafeImage } from "@/components/media/SafeImage";
 import { Icon } from "@/components/ui/Icon";
@@ -145,14 +154,9 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
         <p className="mt-10 text-muted">No photographs in this category yet.</p>
       )}
 
-      {active && (
-        <div
-          ref={dialogRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label={active.caption}
-          className="fixed inset-0 z-100 flex flex-col bg-ink/95 p-4 backdrop-blur-sm sm:p-8"
-        >
+      <AnimatePresence>
+        {active && (
+        <LightboxShell dialogRef={dialogRef} label={active.caption}>
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-canvas/70">
               {openIndex! + 1} / {visible.length}
@@ -168,13 +172,21 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
             </button>
           </div>
 
-          <div className="relative mt-4 min-h-0 flex-1">
+          {/* Keyed on slug so stepping through photographs cross-fades each
+              one rather than swapping the src underneath a static frame. */}
+          <motion.div
+            key={active.slug}
+            initial={{ opacity: 0, scale: 0.985 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mt-4 min-h-0 flex-1"
+          >
             <SafeImage
               photo={active}
               sizes="100vw"
               className="object-contain"
             />
-          </div>
+          </motion.div>
 
           <div className="mt-4 flex items-center justify-between gap-4">
             <button
@@ -195,9 +207,49 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
               <Icon name="ArrowRight" className="size-5" />
             </button>
           </div>
-        </div>
-      )}
+        </LightboxShell>
+        )}
+      </AnimatePresence>
     </>
+  );
+}
+
+/**
+ * The lightbox surface, split out purely so it can call `useIsPresent`.
+ *
+ * An exit animation is rAF-driven, so if the tab is backgrounded mid-close the
+ * fade stalls and the element stays mounted. A stalled `role="dialog"` with
+ * `aria-modal="true"` still sitting in the DOM would hide the rest of the page
+ * from assistive technology — closing used to be instant, so this would be a
+ * regression. `inert` drops it out of the accessibility tree and blocks
+ * interaction the moment React starts removing it, however long the fade takes.
+ */
+function LightboxShell({
+  children,
+  label,
+  dialogRef,
+}: {
+  children: ReactNode;
+  label: string;
+  dialogRef: RefObject<HTMLDivElement | null>;
+}) {
+  const isPresent = useIsPresent();
+
+  return (
+    <motion.div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={label}
+      inert={!isPresent}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="fixed inset-0 z-100 flex flex-col bg-ink/95 p-4 backdrop-blur-sm sm:p-8"
+    >
+      {children}
+    </motion.div>
   );
 }
 

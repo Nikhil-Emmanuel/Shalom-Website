@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
@@ -95,28 +96,38 @@ export function Header() {
         </div>
       </Container>
 
-      {open && (
-        <nav
-          id="mobile-nav"
-          aria-label="Main"
-          className="relative border-t border-hairline bg-canvas md:hidden"
-        >
-          <Container className="flex flex-col py-3">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-md px-3 py-3 text-base font-medium text-body hover:bg-surface-soft"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <ButtonLink href="/get-involved" className="mt-2 sm:hidden">
-              Ways to help
-            </ButtonLink>
-          </Container>
-        </nav>
-      )}
+      {/* `initial={false}` so the drawer does not animate open on first paint
+          if the route is restored with it already open. overflow-hidden is what
+          makes the height transition read as a slide rather than a jump. */}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.nav
+            key="mobile-nav"
+            id="mobile-nav"
+            aria-label="Main"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="relative overflow-hidden border-t border-hairline bg-canvas md:hidden"
+          >
+            <Container className="flex flex-col py-3">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-md px-3 py-3 text-base font-medium text-body hover:bg-surface-soft"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <ButtonLink href="/get-involved" className="mt-2 sm:hidden">
+                Ways to help
+              </ButtonLink>
+            </Container>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
