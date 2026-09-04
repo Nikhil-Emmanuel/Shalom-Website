@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site, builtBy } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
@@ -11,7 +12,15 @@ export function Footer() {
     <footer className="mt-24 border-t border-hairline bg-surface-soft">
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
-          <p className="font-display text-xl font-semibold text-ink">
+          <Image
+            src={site.logo.src}
+            alt=""
+            width={site.logo.width}
+            height={site.logo.height}
+            sizes="56px"
+            className="h-14 w-auto"
+          />
+          <p className="mt-4 font-display text-xl font-semibold text-ink">
             {site.name}
           </p>
           <p className="mt-3 max-w-xs text-sm text-muted">{site.tagline}</p>

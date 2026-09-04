@@ -23,6 +23,9 @@ export function organisationJsonLd() {
     alternateName: "Shalom Ashram",
     description: site.description,
     url: site.url,
+    // Absolute URL required — this is what Google pulls for the knowledge panel.
+    logo: `${site.url}${site.logo.src}`,
+    image: `${site.url}${site.logo.src}`,
     foundingDate: String(site.founded),
     founder: { "@type": "Person", name: founder.name },
     email: contact.emails[0],

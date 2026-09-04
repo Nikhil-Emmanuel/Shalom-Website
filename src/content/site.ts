@@ -18,6 +18,11 @@ export const site: Site = siteSchema.parse({
   // the sitemap and every canonical URL.
   url: "https://shalomchildrenshome.org",
 
+  // Dimensions must match public/logo.png exactly — next/image upscales a
+  // source smaller than the declared width, which softens it. Both numbers are
+  // printed by `python scripts/prepare_logo.py`; update them if it is re-run.
+  logo: { src: "/logo.png", width: 388, height: 440 },
+
   founded: 2018,
   registration: {
     number: "BK/IV 5/2018-2019",

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -49,12 +50,23 @@ export function Header() {
       </div>
 
       <Container className="relative flex h-16 items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="font-display text-base leading-none font-semibold tracking-[-0.01em] text-ink sm:text-lg"
-        >
-          {site.name}
-          <span className="text-primary">.</span>
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3">
+          {/* alt="" — the wordmark beside it already names the link. */}
+          <Image
+            src={site.logo.src}
+            alt=""
+            width={site.logo.width}
+            height={site.logo.height}
+            priority
+            // Sized by CSS, so next/image cannot infer the display width and
+            // would otherwise ship a several-hundred-pixel variant for a 36px mark.
+            sizes="40px"
+            className="h-9 w-auto sm:h-10"
+          />
+          <span className="font-display text-base leading-none font-semibold tracking-[-0.01em] text-ink sm:text-lg">
+            {site.name}
+            <span className="text-primary">.</span>
+          </span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
