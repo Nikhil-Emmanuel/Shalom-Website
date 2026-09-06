@@ -6,6 +6,7 @@ import { GalleryGrid } from "@/components/media/GalleryGrid";
 import { Icon } from "@/components/ui/Icon";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/gallery" },
   title: "Gallery",
   description:
     "Photographs from Shalom Children's Home in Hennur, Bangalore — school mornings, meals, football, health camps and celebrations.",

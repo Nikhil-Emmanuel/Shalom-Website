@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Icon } from "@/components/ui/Icon";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
   description:
     "How Shalom Children's Home began — a promise made in Bangalore in 1978, and a registered children's home since 2018.",

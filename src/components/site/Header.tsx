@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { MuralPattern } from "@/components/site/MuralPattern";
+import { NavPending } from "@/components/site/NavPending";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -85,6 +86,7 @@ export function Header() {
                 )}
               >
                 {link.label}
+                <NavPending />
               </Link>
             );
           })}

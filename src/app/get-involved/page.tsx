@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/get-involved" },
   title: "Ways to help",
   description:
     "Volunteer, sponsor a child, organise a donation drive or give directly to Shalom Children's Home in Hennur, Bangalore. 80G tax exemption available.",

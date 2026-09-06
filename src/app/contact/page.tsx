@@ -7,6 +7,7 @@ import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { VisitMap } from "@/components/sections/VisitMap";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Visit us",
   description:
     "Shalom Children's Home, Sai Layout, Vadrapalaya, Horamavu Agara Road, Hennur, Bangalore. Visitors welcome on weekday evenings and weekend afternoons.",

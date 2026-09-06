@@ -116,6 +116,10 @@ export function Footer() {
               Child protection &amp; privacy
             </Link>
             <span aria-hidden>·</span>
+            <Link href="/terms" className="underline-offset-4 hover:underline">
+              Terms
+            </Link>
+            <span aria-hidden>·</span>
             <span>
               Developed and powered by{" "}
               <a

@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Child protection & privacy",
   description:
     "How Shalom Children's Home protects the identity of the children in its care, and what happens to information you send us.",

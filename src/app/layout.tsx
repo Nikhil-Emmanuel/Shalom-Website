@@ -2,9 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { site } from "@/content/site";
 import { organisationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { CookieNotice } from "@/components/site/CookieNotice";
+import { StickyCta } from "@/components/site/StickyCta";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -26,6 +29,7 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  alternates: { canonical: "/" },
   keywords: [
     "children's home Bangalore",
     "orphanage Hennur",
@@ -73,6 +77,24 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <Footer />
+
+        {/* Clears the fixed mobile CTA so the footer's last row is never left
+            sitting underneath it. Desktop has no dock, so no space is taken. */}
+        <div aria-hidden className="h-20 md:hidden" />
+
+        {/*
+          One fixed stack at the bottom so the cookie notice and the mobile CTA
+          can never overlap each other — they simply sit in a column. The
+          wrapper ignores pointer events so it does not blanket the page; each
+          child re-enables them for itself.
+        */}
+        <div className="pointer-events-none fixed inset-x-0 bottom-0 z-90 flex flex-col">
+          <StickyCta />
+          <CookieNotice />
+        </div>
+
+        {/* Cookieless and carries no identifier, so it needs no consent. */}
+        <Analytics />
       </body>
     </html>
   );
