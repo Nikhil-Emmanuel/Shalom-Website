@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enquirySchema, INTENTS, intentLabel, type EnquiryInput } from "@/lib/enquiry";
 import { site } from "@/content/site";
+import { WEB3FORMS_KEY, submitViaWeb3Forms } from "@/lib/web3forms";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/utils";
@@ -57,6 +58,28 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
 
   const onSubmit = handleSubmit(async (values) => {
     setStatus({ kind: "idle" });
+
+    // Honeypot. Real people never see this field, so anything in it is a bot:
+    // show the ordinary confirmation and send nothing, so it learns nothing.
+    if (values.website) {
+      reset();
+      setStatus({ kind: "sent" });
+      return;
+    }
+
+    // Web3Forms must be called from the browser — its API rejects server-side
+    // requests via Cloudflare. See lib/web3forms.ts.
+    if (WEB3FORMS_KEY) {
+      try {
+        await submitViaWeb3Forms(values);
+        reset();
+        setStatus({ kind: "sent" });
+      } catch {
+        setStatus({ kind: "fallback", mailto: buildMailto() });
+      }
+      return;
+    }
+
     try {
       const response = await fetch("/api/enquiry", {
         method: "POST",
@@ -187,8 +210,8 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
       {status.kind === "fallback" && (
         <div role="alert" className="rounded-xl border border-hairline bg-surface-soft p-5 text-sm">
           <p className="text-body">
-            Our contact form is not connected to email yet. Your message is
-            ready to send from your own mail app instead.
+            We could not send that from here. Nothing is lost — your message is
+            ready to go from your own mail app instead.
           </p>
           <a
             href={status.mailto}
