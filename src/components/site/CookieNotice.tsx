@@ -11,7 +11,7 @@ import { Container } from "@/components/ui/Container";
  *
  * Deliberately not a blocking modal. The site sets no cookies of its own and
  * its analytics are cookieless, so there is nothing here that justifies
- * standing between a visitor and the page — the only consequence of ignoring
+ * standing between a visitor and the page-the only consequence of ignoring
  * this is that the map on the Visit page stays unloaded.
  */
 export function CookieNotice() {
@@ -41,7 +41,7 @@ export function CookieNotice() {
               >
                 Visit
               </Link>{" "}
-              page — so we ask first.{" "}
+              page-so we ask first.{" "}
               <Link
                 href="/privacy"
                 className="text-primary underline underline-offset-4"

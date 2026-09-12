@@ -24,7 +24,7 @@ export function Counter({ value, suffix = "", className }: CounterProps) {
     if (!el) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    // A number ticking up changes text, it does not move anything — safe to
+    // A number ticking up changes text, it does not move anything-safe to
     // keep when motion is reduced, just quicker.
     const duration = motionLevel() === "reduced" ? 0.9 : 1.6;
 

@@ -13,7 +13,7 @@ from outside cannot reach it. A global white-to-alpha replacement would punch a
 hole straight through the middle of the logo.
 
 Outputs:
-  public/logo.png        trimmed, transparent — header, footer, structured data
+  public/logo.png        trimmed, transparent-header, footer, structured data
   src/app/icon.png       512px favicon, cream background (see note below)
   src/app/apple-icon.png 180px home-screen icon, cream background
 
@@ -66,7 +66,7 @@ def compress(image: Image.Image, path: str) -> None:
     """
     Quantise before saving. The mark is flat vector-style colour, so a 256-entry
     palette is visually indistinguishable from truecolour here while cutting the
-    file by roughly 85% — 318kB to well under 50kB. That matters twice over: the
+    file by roughly 85%-318kB to well under 50kB. That matters twice over: the
     footer loads it on every page, and search engines fetch /logo.png directly
     for the organisation's structured data, bypassing next/image entirely.
 

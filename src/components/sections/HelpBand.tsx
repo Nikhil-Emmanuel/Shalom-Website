@@ -15,7 +15,7 @@ export function HelpBand({ involvements }: { involvements: Involvement[] }) {
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-on-dark-muted">
               When we asked the home what it needs most, the first answer was
-              not a number. It was people — turning up, staying in touch, and
+              not a number. It was people-turning up, staying in touch, and
               telling someone else about this place.
             </p>
           </div>

@@ -3,7 +3,7 @@ import { z } from "zod";
 /**
  * Every piece of content on this site is validated against these schemas at
  * import time. When a CMS replaces the local files (phase 2), it must satisfy
- * exactly these shapes — so the swap cannot silently break a page.
+ * exactly these shapes-so the swap cannot silently break a page.
  */
 
 /**
@@ -67,7 +67,7 @@ export const siteSchema = z.object({
     date: z.string(),
     taxExemption: z.string().nullable(),
   }),
-  /** FCRA — when false, the site must not solicit donations from abroad. */
+  /** FCRA-when false, the site must not solicit donations from abroad. */
   acceptsForeignDonations: z.boolean(),
   address: z.object({
     lines: z.array(z.string()),
@@ -83,7 +83,7 @@ export const siteSchema = z.object({
   }),
   contact: z.object({
     emails: z.array(z.string().email()).min(1),
-    /** null until the home supplies a number — the UI hides the field. */
+    /** null until the home supplies a number-the UI hides the field. */
     phone: z.string().nullable(),
     whatsapp: z.string().nullable(),
   }),

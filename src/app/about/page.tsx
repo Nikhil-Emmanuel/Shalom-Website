@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About",
   description:
-    "How Shalom Children's Home began — a promise made in Bangalore in 1978, and a registered children's home since 2018.",
+    "How Shalom Children's Home began-a promise made in Bangalore in 1978, and a registered children's home since 2018.",
 };
 
 export default function AboutPage() {
@@ -37,7 +37,7 @@ export default function AboutPage() {
               {founder.bio}
             </p>
             <p className="mt-4 pl-5 text-sm text-muted">
-              {founder.name} — {founder.role}
+              {founder.name}-{founder.role}
             </p>
           </Reveal>
 

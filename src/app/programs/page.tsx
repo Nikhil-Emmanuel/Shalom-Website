@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/programs" },
   title: "What we do",
   description:
-    "Residential care, schooling, nutrition, medical camps, village tuition centres and sport — the six programmes running at Shalom Children's Home in Hennur, Bangalore.",
+    "Residential care, schooling, nutrition, medical camps, village tuition centres and sport-the six programmes running at Shalom Children's Home in Hennur, Bangalore.",
 };
 
 export default function ProgramsPage() {

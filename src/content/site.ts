@@ -3,7 +3,7 @@ import { siteSchema, type Site } from "./schema";
 /**
  * Organisation facts, taken from the information sheet the home returned.
  *
- * Fields that are `null` are genuinely unknown — the home has not supplied them
+ * Fields that are `null` are genuinely unknown-the home has not supplied them
  * yet. The UI hides those rather than inventing a value, so nothing incorrect
  * reaches structured data or a donor.
  */
@@ -16,10 +16,10 @@ export const site: Site = siteSchema.parse({
 
   // Single source of truth for the site's own address: drives metadataBase,
   // every canonical URL, the sitemap, robots.txt and the JSON-LD @ids. Change
-  // it here and nowhere else. No trailing slash — the consumers append paths.
+  // it here and nowhere else. No trailing slash-the consumers append paths.
   url: "https://shalomhome.in",
 
-  // Dimensions must match public/logo.png exactly — next/image upscales a
+  // Dimensions must match public/logo.png exactly-next/image upscales a
   // source smaller than the declared width, which softens it. Both numbers are
   // printed by `python scripts/prepare_logo.py`; update them if it is re-run.
   logo: { src: "/logo.png", width: 388, height: 440 },
@@ -75,5 +75,5 @@ export const builtBy = {
 export const founder = {
   name: "Samuel P. G.",
   role: "Founder",
-  bio: "Samuel P. G. founded Shalom and runs it together with his family, driven by a conviction he has held since 1978 — that no child should go without a home, a meal, or a chance at school.",
+  bio: "Samuel P. G. founded Shalom and runs it together with his family, driven by a conviction he has held since 1978-that no child should go without a home, a meal, or a chance at school.",
 } as const;

@@ -220,7 +220,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
  * An exit animation is rAF-driven, so if the tab is backgrounded mid-close the
  * fade stalls and the element stays mounted. A stalled `role="dialog"` with
  * `aria-modal="true"` still sitting in the DOM would hide the rest of the page
- * from assistive technology — closing used to be instant, so this would be a
+ * from assistive technology-closing used to be instant, so this would be a
  * regression. `inert` drops it out of the accessibility tree and blocks
  * interaction the moment React starts removing it, however long the fade takes.
  */

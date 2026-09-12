@@ -15,7 +15,7 @@ import { Icon } from "@/components/ui/Icon";
  * `output=embed` is used deliberately: it needs no Maps API key, so there is no
  * billable account for the home to maintain and no key to leak.
  *
- * The iframe is not rendered until consent is given — not merely hidden. An
+ * The iframe is not rendered until consent is given-not merely hidden. An
  * iframe in the DOM has already made the request, so hiding one would make the
  * cookie notice a lie. Until then the panel explains itself and offers a plain
  * link out, which needs no permission from anyone.
@@ -68,7 +68,7 @@ export function VisitMap() {
       <figcaption className="flex flex-wrap items-center justify-between gap-4 border-t border-hairline px-5 py-4 sm:px-6">
         <p className="text-sm text-muted">
           Near Shirdi Sai Temple, Hennur Cross
-          {site.address.postalCode ? ` — ${site.address.postalCode}` : ""}.
+          {site.address.postalCode ? `-${site.address.postalCode}` : ""}.
         </p>
 
         {mapsUrl && (

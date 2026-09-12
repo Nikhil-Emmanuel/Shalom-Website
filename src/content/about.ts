@@ -3,9 +3,9 @@ import { timelineEntrySchema, type TimelineEntry } from "./schema";
 export const story = {
   title: "It started with a promise nobody heard.",
   paragraphs: [
-    "When Samuel P. G. arrived in Bangalore in 1978, he met children living on the street — hungry, unwell, and entirely on their own. He had nothing to give them at the time.",
+    "When Samuel P. G. arrived in Bangalore in 1978, he met children living on the street-hungry, unwell, and entirely on their own. He had nothing to give them at the time.",
     "What he had instead was a conviction that would not leave him alone: that one day he would be the help those children needed. He made that promise quietly, and then spent decades keeping it.",
-    "In 2018, Shalom Children's Home was formally registered. The promise finally had a roof, a kitchen, and a front door — and children on the other side of it.",
+    "In 2018, Shalom Children's Home was formally registered. The promise finally had a roof, a kitchen, and a front door-and children on the other side of it.",
     "Today Samuel runs the home together with his family. Thirty children live here. Fifty-seven more are taught in village centres nearby. The work has grown, but it is still the same promise.",
   ],
 } as const;
@@ -31,7 +31,7 @@ export const timeline: TimelineEntry[] = [
 export const values = [
   {
     title: "Care before charity",
-    body: "The children here are not a cause. They are a household — with routines, birthdays, arguments and homework.",
+    body: "The children here are not a cause. They are a household-with routines, birthdays, arguments and homework.",
   },
   {
     title: "Education is the exit",

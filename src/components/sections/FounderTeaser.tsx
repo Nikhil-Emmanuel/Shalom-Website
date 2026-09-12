@@ -34,7 +34,7 @@ export function FounderTeaser({ photo }: { photo: Photo | null }) {
             {story.paragraphs[1]}
           </p>
           <p className="mt-6 text-sm text-muted">
-            {founder.name} — {founder.role}
+            {founder.name}-{founder.role}
           </p>
           <Link
             href="/about"

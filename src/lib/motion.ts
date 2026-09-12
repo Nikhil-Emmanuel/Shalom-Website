@@ -9,8 +9,8 @@ export const useIsomorphicLayoutEffect =
 /**
  * Read the OS-level motion preference.
  *
- * Note this is commonly on without people realising — Windows turning off
- * "Show animations", or macOS "Reduce motion" — so treating it as an on/off
+ * Note this is commonly on without people realising-Windows turning off
+ * "Show animations", or macOS "Reduce motion"-so treating it as an on/off
  * switch for all animation makes the site look dead for a lot of visitors.
  */
 export function prefersReducedMotion(): boolean {
@@ -19,15 +19,15 @@ export function prefersReducedMotion(): boolean {
 }
 
 /**
- * Always "full" — deliberately not derived from `prefersReducedMotion()`.
+ * Always "full"-deliberately not derived from `prefersReducedMotion()`.
  *
  * This site used to drop to opacity-only animation and disable parallax,
  * pinning and the "A Day at Shalom" scroll journey whenever the OS-level
- * motion preference was on — which, per instruction, is not what this site
+ * motion preference was on-which, per instruction, is not what this site
  * should do: animation should run at full richness on any device capable of
  * rendering it, regardless of that accessibility toggle. `prefersReducedMotion`
  * is kept below as an honest read of the media query in case a future,
- * specific decision needs it — it is just no longer wired to this gate.
+ * specific decision needs it-it is just no longer wired to this gate.
  */
 export type MotionLevel = "full" | "reduced";
 

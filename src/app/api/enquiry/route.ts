@@ -6,7 +6,7 @@ import { deliverEnquiry } from "@/lib/mailer";
  * Receives an enquiry and emails it to the home.
  *
  * Delivery lives in lib/mailer.ts. Until a provider is configured this replies
- * with `mailUnconfigured` so the form can fall back to a prefilled mailto — a
+ * with `mailUnconfigured` so the form can fall back to a prefilled mailto-a
  * message must never be accepted and then silently dropped, which for this
  * organisation could mean a lost donor.
  */
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // Honeypot tripped — accept silently so the bot learns nothing.
+  // Honeypot tripped-accept silently so the bot learns nothing.
   if (parsed.data.website) return NextResponse.json({ ok: true });
 
   const result = await deliverEnquiry(parsed.data);

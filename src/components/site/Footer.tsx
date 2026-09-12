@@ -38,7 +38,7 @@ export function Footer() {
             ))}
             <span className="block">
               {address.locality}
-              {address.postalCode ? ` — ${address.postalCode}` : ""}
+              {address.postalCode ? `-${address.postalCode}` : ""}
             </span>
             <span className="block">{address.region}</span>
           </address>

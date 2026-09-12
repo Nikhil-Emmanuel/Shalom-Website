@@ -52,7 +52,7 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
       .join("\n");
 
     return `mailto:${site.contact.emails[0]}?subject=${encodeURIComponent(
-      `Website enquiry — ${intentLabel(intent)}`,
+      `Website enquiry-${intentLabel(intent)}`,
     )}&body=${encodeURIComponent(body)}`;
   };
 
@@ -67,7 +67,7 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
       return;
     }
 
-    // Web3Forms must be called from the browser — its API rejects server-side
+    // Web3Forms must be called from the browser-its API rejects server-side
     // requests via Cloudflare. See lib/web3forms.ts.
     if (WEB3FORMS_KEY) {
       try {
@@ -122,7 +122,7 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
         className="rounded-2xl border border-green/30 bg-green/5 p-8"
       >
         <p className="font-display text-xl font-semibold text-ink">
-          Thank you — that reached us.
+          Thank you-that reached us.
         </p>
         <p className="mt-3 text-body">
           Someone from the home will get back to you. If it is urgent, email{" "}
@@ -195,7 +195,7 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
         />
       </Field>
 
-      {/* Honeypot — visually and programmatically hidden from real users */}
+      {/* Honeypot-visually and programmatically hidden from real users */}
       <div aria-hidden className="hidden">
         <label htmlFor="website">Website</label>
         <input id="website" tabIndex={-1} autoComplete="off" {...register("website")} />
@@ -210,7 +210,7 @@ export function EnquiryForm({ defaultIntent = "visit" }: { defaultIntent?: strin
       {status.kind === "fallback" && (
         <div role="alert" className="rounded-xl border border-hairline bg-surface-soft p-5 text-sm">
           <p className="text-body">
-            We could not send that from here. Nothing is lost — your message is
+            We could not send that from here. Nothing is lost-your message is
             ready to go from your own mail app instead.
           </p>
           <a

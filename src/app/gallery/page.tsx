@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/gallery" },
   title: "Gallery",
   description:
-    "Photographs from Shalom Children's Home in Hennur, Bangalore — school mornings, meals, football, health camps and celebrations.",
+    "Photographs from Shalom Children's Home in Hennur, Bangalore-school mornings, meals, football, health camps and celebrations.",
 };
 
 export default function GalleryPage() {

@@ -10,7 +10,7 @@ import { Icon } from "@/components/ui/Icon";
  * Persistent call to action on small screens.
  *
  * Only appears once the visitor has scrolled past roughly the first viewport,
- * so it never sits on top of the hero's own buttons — a second identical CTA
+ * so it never sits on top of the hero's own buttons-a second identical CTA
  * competing with the first is the thing that makes these look bolted on.
  *
  * Hidden entirely on /get-involved and /contact: on those pages the real form

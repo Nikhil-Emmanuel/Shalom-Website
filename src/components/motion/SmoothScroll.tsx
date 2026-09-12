@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  * ScrollTrigger stays in sync with the eased scroll position. Without this,
  * pinned sections drift from the pointer.
  *
- * Runs unconditionally — the OS-level reduced-motion preference no longer
+ * Runs unconditionally-the OS-level reduced-motion preference no longer
  * gates this, per instruction (see lib/motion.ts).
  */
 export function SmoothScroll() {

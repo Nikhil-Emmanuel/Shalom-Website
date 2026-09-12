@@ -11,12 +11,12 @@ import { intentLabel, type EnquiryInput } from "@/lib/enquiry";
  *
  * Web3Forms is NOT handled here, despite being the provider actually in use.
  * Its API sits behind Cloudflare bot protection and answers a server-side
- * fetch with the "Just a moment..." interstitial and a 403 — verified against
+ * fetch with the "Just a moment..." interstitial and a 403-verified against
  * a valid key, which succeeds from a browser and fails from Node. It is
  * submitted from the client instead; see `lib/web3forms.ts`.
  *
  * Returns a discriminated result rather than throwing, so the route can tell
- * "nobody configured this yet" apart from "the provider failed" — those need
+ * "nobody configured this yet" apart from "the provider failed"-those need
  * different things said to the person who just typed out a message.
  */
 export type DeliveryResult =
@@ -38,7 +38,7 @@ function composeBody(input: EnquiryInput): string {
 }
 
 function subjectFor(input: EnquiryInput): string {
-  return `${site.shortName} website — ${intentLabel(input.intent)} — ${input.name}`;
+  return `${site.shortName} website-${intentLabel(input.intent)}-${input.name}`;
 }
 
 async function viaResend(

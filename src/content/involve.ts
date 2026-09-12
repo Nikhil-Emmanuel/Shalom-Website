@@ -2,7 +2,7 @@ import { involvementSchema, type Involvement } from "./schema";
 
 /**
  * The home confirmed it accepts volunteers, donation drives, sponsorship and
- * monetary contributions — but supplied no bank or UPI details, so v1 routes
+ * monetary contributions-but supplied no bank or UPI details, so v1 routes
  * every intent through the enquiry form rather than a payment page.
  * See lib/donations.ts for the seam a gateway will slot into.
  */
@@ -24,7 +24,7 @@ export const involvements: Involvement[] = [
     slug: "drive",
     title: "Organise a donation drive",
     summary:
-      "Run a collection where you already are — at work, at college, or on your street.",
+      "Run a collection where you already are-at work, at college, or on your street.",
     points: [
       "Workplaces, schools, colleges and residential communities",
       "Books, stationery, clothes and school supplies",
@@ -53,7 +53,7 @@ export const involvements: Involvement[] = [
       "Contributions go to school fees, food, medical care and the village centres.",
     points: [
       "Eligible for 80G tax exemption",
-      "Registered children's home — BK/IV 5/2018-2019",
+      "Registered children's home-BK/IV 5/2018-2019",
       "Donations accepted from within India only",
     ],
     icon: "Heart",

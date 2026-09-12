@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 
 /**
- * Web app manifest — completes the icon set alongside icon.png and
+ * Web app manifest-completes the icon set alongside icon.png and
  * apple-icon.png, and gives Android a proper name and theme colour when
  * someone adds the site to their home screen.
  */

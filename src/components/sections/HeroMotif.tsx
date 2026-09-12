@@ -1,13 +1,13 @@
 /**
  * A small child flying a kite, drifting slowly behind the hero copy.
  *
- * Decorative only — aria-hidden, non-interactive, and kept at low opacity so it
+ * Decorative only-aria-hidden, non-interactive, and kept at low opacity so it
  * never competes with the headline or hurts text contrast. Line art rather than
  * a cartoon: the site is asking adults for money on behalf of real children,
  * and cutesy illustration would undercut that.
  *
  * The loop is pure CSS, so it costs no JavaScript and no animation frames. It
- * stops entirely under prefers-reduced-motion — a continuously moving element
+ * stops entirely under prefers-reduced-motion-a continuously moving element
  * in the periphery is exactly what that setting exists to prevent.
  */
 export function HeroMotif() {

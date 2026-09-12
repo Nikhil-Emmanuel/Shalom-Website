@@ -22,7 +22,7 @@ import {
 /**
  * Explicit registry rather than dynamic lookup: content files reference icons
  * by name, and this keeps an invalid name a type error instead of a blank space
- * at runtime. SVG only — never emoji.
+ * at runtime. SVG only-never emoji.
  */
 const icons = {
   ArrowRight,

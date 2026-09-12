@@ -21,7 +21,7 @@ export function Mission() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Opacity only — nothing moves — so this runs at both motion tiers.
+    // Opacity only-nothing moves-so this runs at both motion tiers.
     let ctx: gsap.Context | undefined;
 
     const cancel = whenVisible(() => {

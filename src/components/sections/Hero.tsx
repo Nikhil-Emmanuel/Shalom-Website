@@ -36,8 +36,8 @@ export function Hero({ photos }: { photos: Photo[] }) {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       // The hero is the highest-stakes element on the site and this timeline
-      // starts it at opacity 0. If it is ever interrupted — the tab is hidden
-      // mid-flight, the ticker stalls — the whole hero would be left blank.
+      // starts it at opacity 0. If it is ever interrupted-the tab is hidden
+      // mid-flight, the ticker stalls-the whole hero would be left blank.
       // Jump to the end state if it has not finished in a generous window.
       failsafe = window.setTimeout(() => {
         if (tl.progress() < 1) tl.progress(1);
@@ -147,7 +147,7 @@ export function Hero({ photos }: { photos: Photo[] }) {
           </div>
         </div>
 
-        {/* Photo cluster — hidden from AT, it is decorative here; the gallery
+        {/* Photo cluster-hidden from AT, it is decorative here; the gallery
             page carries the same images with full captions. */}
         <div aria-hidden className="relative">
           <div className="grid grid-cols-5 grid-rows-6 gap-3 sm:gap-4 h-[26rem] sm:h-[32rem] lg:h-[34rem]">

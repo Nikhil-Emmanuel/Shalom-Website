@@ -32,7 +32,7 @@ const STAGGER_STEP = 0.08;
  *
  * Content is visible in the markup and only ever hidden by the effect below, so
  * no-JS, crawlers and hidden tabs are all left with the finished state. That
- * ordering matters — a declarative `initial={{ opacity: 0 }}` would be
+ * ordering matters-a declarative `initial={{ opacity: 0 }}` would be
  * server-rendered as inline `opacity: 0` and leave content invisible if
  * hydration never happened.
  */
@@ -53,7 +53,7 @@ export function Reveal({
     [staggered, scope],
   );
 
-  // Applied in a layout effect so the hidden state lands before paint — no
+  // Applied in a layout effect so the hidden state lands before paint-no
   // flash of the final state followed by it disappearing.
   useIsomorphicLayoutEffect(() => {
     // Hidden tab: leave the content alone. IntersectionObserver does not fire

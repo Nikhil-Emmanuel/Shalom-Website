@@ -46,7 +46,7 @@ export default function PrivacyPage() {
             <p className="mt-4 leading-relaxed">
               Visitors are welcome during our published hours, and we ask that
               you contact us beforehand. Visits are supervised. This is not
-              about mistrust — it is what a safe home for children requires.
+              about mistrust-it is what a safe home for children requires.
             </p>
           </div>
 

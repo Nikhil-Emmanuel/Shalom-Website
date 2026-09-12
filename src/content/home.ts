@@ -2,9 +2,9 @@ import { journeyStopSchema, statSchema, type JourneyStop, type Stat } from "./sc
 
 export const hero = {
   eyebrow: "Hennur, Bangalore",
-  // Line breaks are deliberate — each renders as its own masked, animated line.
+  // Line breaks are deliberate-each renders as its own masked, animated line.
   headline: "Every child\ndeserves a place\nto come home to.",
-  body: "Shalom Children's Home gives thirty children a bed, three meals, a school uniform and a family — and reaches fifty-seven more through tuition centres in the villages around us.",
+  body: "Shalom Children's Home gives thirty children a bed, three meals, a school uniform and a family-and reaches fifty-seven more through tuition centres in the villages around us.",
   primaryCta: { label: "Ways to help", href: "/get-involved" },
   secondaryCta: { label: "See our work", href: "/programs" },
 } as const;
@@ -32,12 +32,12 @@ export const stats: Stat[] = [
 
 export const mission = {
   lead: "We provide shelter, food, education and medical care.",
-  body: "Our work reaches past our own gate — into villages, where children who would otherwise fall behind get the teaching and the supplies they need to keep up. Every part of it is rooted in the same conviction: that a child given care, consistency and a chance will take it.",
+  body: "Our work reaches past our own gate-into villages, where children who would otherwise fall behind get the teaching and the supplies they need to keep up. Every part of it is rooted in the same conviction: that a child given care, consistency and a chance will take it.",
 } as const;
 
 /**
  * The pinned horizontal journey on the home page.
- * Every photo referenced here must survive the safeguarding filter — these are
+ * Every photo referenced here must survive the safeguarding filter-these are
  * all classified `incidental`, so they render under the default policy.
  */
 export const journey: JourneyStop[] = [

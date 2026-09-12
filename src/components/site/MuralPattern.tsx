@@ -1,5 +1,5 @@
 /**
- * A faint tiled mural behind the header — the sort of line art painted on the
+ * A faint tiled mural behind the header-the sort of line art painted on the
  * walls of a children's home: a house, a kite, birds, a sun, a book, a ball.
  *
  * Decorative and aria-hidden. Kept very low contrast so it reads as texture

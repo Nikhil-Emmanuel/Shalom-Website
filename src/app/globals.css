@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Shalom Children's Home — design tokens
+ * Shalom Children's Home-design tokens
  * Direction: warm editorial canvas. Structure adapted from the `claude` reference
  * system (awesome-design-md); hues re-derived from the home's own photographs —
  * terracotta from the celebration carpet, marigold from the Independence Day
@@ -11,7 +11,7 @@
  *   ink     on canvas  16.6:1   body   on canvas  9.8:1
  *   muted   on canvas   5.1:1   primary on canvas 4.8:1
  *   white   on primary  5.1:1   white  on green   6.0:1
- * `accent` (marigold) is decorative only — never used for text.
+ * `accent` (marigold) is decorative only-never used for text.
  */
 
 @theme {
@@ -42,7 +42,7 @@
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Fluid scale — clamp so 375px never overflows and 1440px never looks timid */
+  /* Fluid scale-clamp so 375px never overflows and 1440px never looks timid */
   --text-display-xl: clamp(2.5rem, 1.5rem + 4vw, 4rem);
   --text-display-lg: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
   --text-display-md: clamp(1.75rem, 1.3rem + 1.9vw, 2.75rem);
@@ -96,7 +96,7 @@
     text-wrap: pretty;
   }
 
-  /* Keep focus visible — never remove it. Offset so it clears image edges. */
+  /* Keep focus visible-never remove it. Offset so it clears image edges. */
   :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 3px;
@@ -118,7 +118,7 @@
   [data-reveal] {
     opacity: 0;
     transform: translateY(var(--reveal-y, 28px));
-    /* Hiding must be instantaneous — a transition here would fade the element
+    /* Hiding must be instantaneous-a transition here would fade the element
      * OUT on mount before fading it back in, which reads as a flash. */
     transition: none;
   }
@@ -193,7 +193,7 @@
 
 /*
  * No `@media (prefers-reduced-motion: reduce)` block, by instruction: this
- * site runs full motion — loops, parallax, pinning, the scroll journey —
+ * site runs full motion-loops, parallax, pinning, the scroll journey —
  * regardless of that OS-level accessibility toggle, on any device capable of
  * rendering it. See lib/motion.ts `motionLevel()`, which is the single place
  * that decision is recorded and where it would be reversed if that changes.

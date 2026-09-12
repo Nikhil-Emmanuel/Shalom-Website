@@ -10,7 +10,7 @@ import type { JourneyStop, Photo, Program } from "./schema";
 /**
  * The single accessor every component reads from.
  *
- * Components must never import the content files directly — going through here
+ * Components must never import the content files directly-going through here
  * means (a) the safeguarding filter cannot be bypassed by accident, and (b) a
  * CMS can replace the file-backed source in phase 2 by changing this module
  * alone.

@@ -3,7 +3,7 @@ import { site, founder, builtBy } from "@/content/site";
 /**
  * JSON-LD for the home. Visibility is the entire point of this project, so the
  * structured data has to line up exactly with the Google Business Profile and
- * the JustDial listing — same name, same address, same phone.
+ * the JustDial listing-same name, same address, same phone.
  *
  * Fields the home has not confirmed are omitted rather than guessed; a wrong
  * PIN code or phone number in structured data is worse than a missing one.
@@ -23,7 +23,7 @@ export function organisationJsonLd() {
     alternateName: "Shalom Ashram",
     description: site.description,
     url: site.url,
-    // Absolute URL required — this is what Google pulls for the knowledge panel.
+    // Absolute URL required-this is what Google pulls for the knowledge panel.
     logo: `${site.url}${site.logo.src}`,
     image: `${site.url}${site.logo.src}`,
     foundingDate: String(site.founded),

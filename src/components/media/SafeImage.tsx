@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 /**
  * The only component that renders a photograph of the home.
  *
- * It refuses to render anything the safeguarding policy withholds — so even if
+ * It refuses to render anything the safeguarding policy withholds-so even if
  * a page passes a withheld photo by mistake, nothing identifiable is published.
  * Callers should filter through the content accessor first; this is the backstop.
  */

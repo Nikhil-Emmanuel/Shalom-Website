@@ -15,7 +15,7 @@ import type { FaceVisibility, Photo } from "@/content/schema";
  * public/ in the first place. Filtering only here would still leave the file
  * fetchable by direct URL.
  *
- * To publish faces — only after the home gives written permission:
+ * To publish faces-only after the home gives written permission:
  *   1. set facePolicy to "open" in src/content/media.policy.json
  *   2. re-run `node scripts/prepare-media.mjs` to emit the withheld images
  */
@@ -39,7 +39,7 @@ export function isPublishable(photo: PolicyFields): boolean {
   // Faces already obscured by scripts/redact_faces.py and checked by eye.
   if (photo.redacted) return true;
   // Released unredacted by explicit client instruction. Needs the home's
-  // written consent before launch — see UNREDACTED_OVERRIDE in prepare-media.
+  // written consent before launch-see UNREDACTED_OVERRIDE in prepare-media.
   if (photo.explicitOverride) return true;
   return ALLOWED_UNDER_PROTECT.includes(photo.faceVisibility);
 }

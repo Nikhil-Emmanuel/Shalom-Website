@@ -193,7 +193,7 @@ function build(): Photo[] {
         `No generated data for "${entry.slug}". Run: node scripts/prepare-media.mjs`,
       );
     }
-    // Withheld by the safeguarding policy — no file exists to render.
+    // Withheld by the safeguarding policy-no file exists to render.
     if (!meta.published) continue;
 
     photos.push(

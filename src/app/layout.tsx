@@ -25,8 +25,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s — ${site.name}`,
+    default: `${site.name}-${site.tagline}`,
+    template: `%s-${site.name}`,
   },
   description: site.description,
   alternates: { canonical: "/" },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: site.name,
-    title: `${site.name} — ${site.tagline}`,
+    title: `${site.name}-${site.tagline}`,
     description: site.description,
     url: site.url,
   },
@@ -62,7 +62,7 @@ export default function RootLayout({
       <body>
         <script
           type="application/ld+json"
-          // Structured data is static and built from our own content — safe.
+          // Structured data is static and built from our own content-safe.
           dangerouslySetInnerHTML={{
             __html: JSON.stringify([organisationJsonLd(), websiteJsonLd()]),
           }}
@@ -84,7 +84,7 @@ export default function RootLayout({
 
         {/*
           One fixed stack at the bottom so the cookie notice and the mobile CTA
-          can never overlap each other — they simply sit in a column. The
+          can never overlap each other-they simply sit in a column. The
           wrapper ignores pointer events so it does not blanket the page; each
           child re-enables them for itself.
         */}

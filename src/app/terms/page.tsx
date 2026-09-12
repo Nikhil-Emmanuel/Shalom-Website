@@ -48,7 +48,7 @@ export default function TermsPage() {
               Donations
             </h2>
             <p className="mt-4 leading-relaxed">
-              Donations fund the day-to-day running of the home — food,
+              Donations fund the day-to-day running of the home-food,
               schooling, medical care and the village tuition centres. We cannot
               guarantee that a particular gift pays for a particular child or
               item, because needs shift through the year and the children come
@@ -59,7 +59,7 @@ export default function TermsPage() {
                 ? `Donations are eligible for ${site.registration.taxExemption} tax exemption; ask us for a receipt.`
                 : ""}{" "}
               {!site.acceptsForeignDonations &&
-                "We are not currently permitted to receive donations from outside India, so please do not send funds from abroad — we would have to return them."}
+                "We are not currently permitted to receive donations from outside India, so please do not send funds from abroad-we would have to return them."}
             </p>
             <p className="mt-4 leading-relaxed">
               Donations are voluntary and, once given, are generally not
@@ -75,7 +75,7 @@ export default function TermsPage() {
             <p className="mt-4 leading-relaxed">
               Visitors are welcome during our published hours, by arrangement.
               Visits are supervised, and we may decline or end a visit at our
-              discretion. This is not about mistrust — a safe home for children
+              discretion. This is not about mistrust-a safe home for children
               requires it.
             </p>
           </div>
@@ -88,7 +88,7 @@ export default function TermsPage() {
               The words and photographs on this site belong to the home. Please
               do not reuse them commercially, or in any way that would identify
               a child in our care, without asking us first. Press and supporters
-              are usually very welcome to use them — just get in touch.
+              are usually very welcome to use them-just get in touch.
             </p>
             <p className="mt-4 leading-relaxed">
               If you photograph the children during a visit, please do not
@@ -114,7 +114,7 @@ export default function TermsPage() {
               decision you are making, please check with us directly.
             </p>
             <p className="mt-4 leading-relaxed">
-              The site links to other places — a map, social media. We are not
+              The site links to other places-a map, social media. We are not
               responsible for what those services do.
             </p>
           </div>

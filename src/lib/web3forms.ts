@@ -13,12 +13,12 @@ import { intentLabel, type EnquiryInput } from "@/lib/enquiry";
  * failed in production while looking correct in the code.
  *
  * Browser submission is Web3Forms' documented model, and the access key is
- * designed to be public — every example in their docs puts it in a plain hidden
+ * designed to be public-every example in their docs puts it in a plain hidden
  * input. It identifies a destination inbox, not an account; it cannot read
  * anything, and abuse is handled by their own rate limiting.
  *
  * Once the home owns a domain, Resend through `lib/mailer.ts` is the better
- * path — mail then comes from the home's own address, and the key stays server
+ * path-mail then comes from the home's own address, and the key stays server
  * side. This exists so the form works *today*, without a domain.
  */
 export const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
@@ -31,7 +31,7 @@ export async function submitViaWeb3Forms(input: EnquiryInput): Promise<void> {
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({
       access_key: WEB3FORMS_KEY,
-      subject: `${site.shortName} website — ${intentLabel(input.intent)} — ${input.name}`,
+      subject: `${site.shortName} website-${intentLabel(input.intent)}-${input.name}`,
       from_name: `${site.shortName} website`,
       // Lets the home hit reply and reach the sender directly.
       replyto: input.email,

@@ -11,7 +11,7 @@ import { site } from "@/content/site";
  *
  * A 404 is expected; this is for the unexpected. Without it Next falls back to
  * an unstyled default screen, which on a site asking strangers for money reads
- * as broken rather than as a hiccup — so it keeps the site's own shell and
+ * as broken rather than as a hiccup-so it keeps the site's own shell and
  * always offers a way to reach a human.
  */
 export default function Error({
@@ -37,7 +37,7 @@ export default function Error({
           That did not load properly.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-body">
-          The fault is ours, not yours. Trying again usually sorts it — and if
+          The fault is ours, not yours. Trying again usually sorts it-and if
           you were part-way through sending us a message, please do get in touch
           directly so it is not lost.
         </p>

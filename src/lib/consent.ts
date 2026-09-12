@@ -8,7 +8,7 @@ import { useSyncExternalStore } from "react";
  *
  * The site's own analytics are cookieless and carry no identifier, so they need
  * no consent and are not covered by this. That is the whole reason this is a
- * single narrow question rather than the usual wall of toggles — a banner that
+ * single narrow question rather than the usual wall of toggles-a banner that
  * asks about things the site does not actually do is theatre, and it trains
  * people to dismiss the ones that matter.
  *
@@ -54,7 +54,7 @@ const noopSubscribe = () => () => {};
  * localStorage cannot be read on the server, so anything that depends on it
  * must render its "unknown" state first. Without this the cookie notice would
  * appear on every single page load for people who already answered it, then
- * animate itself away once the stored value was read — which looks broken and
+ * animate itself away once the stored value was read-which looks broken and
  * is precisely the nagging these banners are hated for.
  */
 export function useHydrated(): boolean {
@@ -67,7 +67,7 @@ export function useHydrated(): boolean {
 
 export function useConsent(): [Consent, (value: Exclude<Consent, "unset">) => void] {
   // useSyncExternalStore rather than useState + useEffect: localStorage is an
-  // external store, and this is the primitive built for exactly that — it gets
+  // external store, and this is the primitive built for exactly that-it gets
   // the SSR snapshot right and re-reads without a render-then-correct flash.
   const consent = useSyncExternalStore(subscribe, readConsent, serverSnapshot);
   return [consent, setConsent];

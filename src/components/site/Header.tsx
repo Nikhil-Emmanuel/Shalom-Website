@@ -52,7 +52,7 @@ export function Header() {
 
       <Container className="relative flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3">
-          {/* alt="" — the wordmark beside it already names the link. */}
+          {/* alt=""-the wordmark beside it already names the link. */}
           <Image
             src={site.logo.src}
             alt=""

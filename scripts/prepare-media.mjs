@@ -2,14 +2,14 @@
  * Optimises the home's supplied photographs into public/media and records their
  * dimensions, blur placeholder and privacy classification for next/image.
  *
- * IMPORTANT — this script enforces the safeguarding policy at the *file* level.
+ * IMPORTANT-this script enforces the safeguarding policy at the *file* level.
  * A photograph classified `prominent` is never written into public/ while the
  * policy is "protect", because anything under public/ is fetchable by direct
  * URL whether or not a page renders it. Filtering only at render time would
  * leave identifiable children one guessed filename away from the public.
  *
  * `faceVisibility` lives here (rather than in the TS manifest) precisely so the
- * build step can act on it. Editorial metadata — captions, alt text, category —
+ * build step can act on it. Editorial metadata-captions, alt text, category —
  * stays human-authored in src/content/media.manifest.ts.
  *
  *   none        no children, or none whose face is visible (adults only)
@@ -63,7 +63,7 @@ const FILES = [
 
 /**
  * Photographs whose faces have been redacted by scripts/redact_faces.py AND
- * checked by eye afterwards — every child's face is either obscured or not
+ * checked by eye afterwards-every child's face is either obscured or not
  * visible, and the picture still reads. These publish despite being classified
  * `prominent`, sourced from MEDIA FILES/redacted/ rather than the original.
  *
@@ -91,7 +91,7 @@ const REDACTED = new Set([
  * instruction, overriding the classification.
  *
  * This shows an identifiable child. It needs the home's written consent before
- * the site goes live — see the note in README under Child safeguarding.
+ * the site goes live-see the note in README under Child safeguarding.
  */
 const UNREDACTED_OVERRIDE = new Set(["village-stationery-7"]);
 
@@ -118,7 +118,7 @@ async function run() {
   for (const [file, slug, faceVisibility] of FILES) {
     if (!publishes(faceVisibility, slug)) {
       // Recorded so the TS manifest still knows the photo exists and why it is
-      // absent — but no file is emitted, so there is nothing to fetch.
+      // absent-but no file is emitted, so there is nothing to fetch.
       manifest[slug] = {
         faceVisibility,
         published: false,
@@ -130,7 +130,7 @@ async function run() {
     }
 
     // Redacted photographs are read from the processed copy; the original —
-    // with faces intact — is never the source for anything under public/.
+    // with faces intact-is never the source for anything under public/.
     const isRedacted =
       facePolicy !== "open" &&
       REDACTED.has(slug) &&

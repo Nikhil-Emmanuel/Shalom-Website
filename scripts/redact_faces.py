@@ -5,7 +5,7 @@ otherwise withheld by the safeguarding policy can be published.
 Design notes that matter:
 
 * The detector is a labour-saver, NOT the safety mechanism. A missed face is a
-  silent failure — the image still looks processed, so nobody re-checks it.
+  silent failure-the image still looks processed, so nobody re-checks it.
   Every output must be reviewed by eye before it is published, and misses are
   corrected by adding manual boxes to MANUAL_BOXES below.
 
@@ -17,7 +17,7 @@ Design notes that matter:
   and then blurred, so it cannot be recovered by sharpening or upscaling.
 
 Run: python scripts/redact_faces.py
-Outputs to MEDIA FILES/redacted/ for review — nothing reaches public/ until
+Outputs to MEDIA FILES/redacted/ for review-nothing reaches public/ until
 prepare-media.mjs is told the slug is verified.
 """
 
@@ -56,11 +56,11 @@ TARGETS = [
 MANUAL_BOXES: dict[str, list[list[float]]] = {}
 
 # Reviewed by eye and confirmed: every child's face is either redacted or not
-# visible, and the picture still reads. Only these are published — see the
+# visible, and the picture still reads. Only these are published-see the
 # REDACTED set in prepare-media.mjs, which must stay in sync.
 #
 # Deliberately NOT published:
-#   lunch-together — faces dominate the frame, so redaction destroys the
+#   lunch-together-faces dominate the frame, so redaction destroys the
 #   composition, and two small faces at the left edge could not be confirmed.
 VERIFIED = {
     "village-stationery-1",
@@ -82,7 +82,7 @@ SCORE_THRESHOLD = 0.5   # still permissive; see module docstring
 PADDING = 0.35          # grow boxes to cover hair, chin and ears
 
 # No real face in these photographs spans more than about a sixth of the frame.
-# Anything larger is a false positive on a flat surface — a bus panel, a table —
+# Anything larger is a false positive on a flat surface-a bus panel, a table —
 # and produces a huge smear that ruins the picture. Rejecting them is safe.
 MAX_FACE_WIDTH_RATIO = 0.30
 
