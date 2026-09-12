@@ -14,9 +14,10 @@ export const site: Site = siteSchema.parse({
   description:
     "Shalom Children's Home in Hennur, Bangalore provides shelter, food, education and medical care to 30 children, and supports 57 more through village tuition centres.",
 
-  // TODO: replace once the home registers a domain — drives metadataBase,
-  // the sitemap and every canonical URL.
-  url: "https://shalomchildrenshome.org",
+  // Single source of truth for the site's own address: drives metadataBase,
+  // every canonical URL, the sitemap, robots.txt and the JSON-LD @ids. Change
+  // it here and nowhere else. No trailing slash — the consumers append paths.
+  url: "https://shalomhome.in",
 
   // Dimensions must match public/logo.png exactly — next/image upscales a
   // source smaller than the declared width, which softens it. Both numbers are

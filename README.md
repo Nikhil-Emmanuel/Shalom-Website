@@ -88,21 +88,22 @@ Entrance animations are deferred until the document is visible (`whenVisible()`)
 
 ## Contact form
 
-`POST /api/enquiry` validates the submission and hands it to `src/lib/mailer.ts`, which picks a provider from the environment. Copy `.env.example` to `.env.local` and fill in **one** of them.
+Two providers, and they submit from **different sides**. Copy `.env.example` to `.env.local` and fill in one.
 
-**Web3Forms — recommended for now.** Create a free access key at [web3forms.com](https://web3forms.com) using the home's Gmail address; the key arrives in that inbox. Set `WEB3FORMS_ACCESS_KEY` and the form is live. No domain, no DNS, nothing to renew.
+**Web3Forms — in use now, submitted from the browser.** `src/lib/web3forms.ts`, called by the form directly. This is not a stylistic choice: the Web3Forms API sits behind Cloudflare bot protection and answers a server-side `fetch` with the "Just a moment..." interstitial and a `403`, never the API. Verified against a valid key, which succeeds from a browser and fails from Node with identical headers — and datacenter IPs like Vercel's are challenged hardest, so a server-side implementation fails in production while reviewing as correct. Browser submission is their documented model. Set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`; the `NEXT_PUBLIC_` prefix is deliberate, as the key names a destination inbox and grants no read access.
 
-**Resend — better once the home owns a domain.** Set `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL`. Resend refuses to send to arbitrary recipients until a domain is verified in its dashboard, which is why it is not the default.
+**Resend — the better path, now that the home owns a domain.** `POST /api/enquiry` → `src/lib/mailer.ts`, server side. Set `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL` (at `shalomhome.in`) once the domain is verified in Resend's dashboard. Mail then comes from the home's own address rather than a relay. **Never** put a Resend key behind `NEXT_PUBLIC_` — that one is a real secret.
 
 Either way `reply-to` is the sender's address, so hitting Reply in Gmail goes straight back to them.
 
-With neither set, the route returns an "unconfigured" response and the form offers a prefilled `mailto:` link instead. A message is never accepted and then silently dropped.
+With neither set, the form offers a prefilled `mailto:` link instead — as it does if a send fails. A message is never accepted and then silently dropped.
 
-The hidden `website` field is a honeypot. It is intentionally permissive in the schema: validating it as `max(0)` made a filled honeypot fail validation and return the ordinary error, telling a bot its submission was rejected. The route now accepts it and returns `200` silently.
+The hidden `website` field is a honeypot, checked client-side before submitting. It is intentionally permissive in the schema: validating it as `max(0)` made a filled honeypot fail validation and return the ordinary error, telling a bot its submission was rejected. It now shows the ordinary confirmation and sends nothing.
 
 ## Outstanding before launch
 
-- **Contact form email** — set `WEB3FORMS_ACCESS_KEY` in `.env.local`, or the form falls back to `mailto:`
+- **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` on the host** — `.env.local` is local only; without it in Vercel's environment the live form falls back to `mailto:`
 - **Bank / UPI details** — needed for any real donation flow (80G exemption applies; FCRA is *not* held, so donations are India-only)
-- Logo file, written photo policy, domain name, testimonials
+- **Point `shalomhome.in` at the deployment** — `site.url` already expects it, so canonicals, the sitemap, OG URLs and JSON-LD `@id`s are wrong until DNS resolves
+- Testimonials
 - A written photo policy from the home would let us drop the redaction and use these photographs as they were taken
