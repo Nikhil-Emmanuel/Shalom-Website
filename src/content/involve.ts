@@ -53,7 +53,7 @@ export const involvements: Involvement[] = [
       "Contributions go to school fees, food, medical care and the village centres.",
     points: [
       "Eligible for 80G tax exemption",
-      "Registered children's home-BK/IV 5/2018-2019",
+      "Registered children's home-BK/IV 5/2008-2026",
       "Donations accepted from within India only",
     ],
     icon: "Heart",

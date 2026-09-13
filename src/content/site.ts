@@ -24,10 +24,10 @@ export const site: Site = siteSchema.parse({
   // printed by `python scripts/prepare_logo.py`; update them if it is re-run.
   logo: { src: "/logo.png", width: 388, height: 440 },
 
-  founded: 2018,
+  founded: 2008,
   registration: {
-    number: "BK/IV 5/2018-2019",
-    date: "3 April 2018",
+    number: "BK/IV 5/2008-2026",
+    date: "3 April 2008",
     taxExemption: "80G",
   },
 
